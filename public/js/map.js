@@ -13,8 +13,8 @@ var svg = d3.select("body").append("svg")
     .attr("height", height);
 
 queue()
-    .defer(d3.json, "/data/us.json")
-    .defer(d3.json, "/data/us-congress-114.json")
+    .defer(d3.json, "/data/sd.json")
+    .defer(d3.json, "/data/ca-congress-114.json")
     .await(ready);
 
 function ready(error, us, congress) {
@@ -45,10 +45,10 @@ function ready(error, us, congress) {
       .datum(topojson.mesh(congress, congress.objects.districts, function(a, b) { return a !== b && (a.id / 1000 | 0) === (b.id / 1000 | 0); }))
       .attr("d", path);
 
-  svg.append("path")
+/*  svg.append("path")
       .attr("class", "state-boundaries")
       .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
-      .attr("d", path);
+      .attr("d", path);*/
 }
 
 d3.select(self.frameElement).style("height", height + "px");
