@@ -1,28 +1,35 @@
 var width = 960,
     height = 600;
 
-var projection = d3.geo.albersUsa()
-    .scale(1280)
-    .translate([width / 2, height / 2]);
-
-var path = d3.geo.path()
-    .projection(projection);
-
-var svg = d3.select("body").append("svg")
-    .attr("width", width)
-    .attr("height", height);
-
 queue()
     .defer(d3.json, "/data/sd.json")
     .defer(d3.json, "/data/ca-congress-114.json")
     .await(ready);
 
-function ready(error, us, congress) {
+function ready(error, sd, congress) {
   if (error) throw error;
+
+  var sdgeo = topojson.feature(sd, sd.objects.land);
+
+  var center = d3.geo.centroid(sdgeo);
+  var scale = 25000;
+  var offset = [width/2, height/2];
+  var projection = d3.geo.mercator()
+                      .scale(scale)
+                      .center(center)
+                      .translate(offset);
+
+  var path = d3.geo.path()
+    .projection(projection);
+
+
+  var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
 
   svg.append("defs").append("path")
       .attr("id", "land")
-      .datum(topojson.feature(us, us.objects.land))
+      .datum(sdgeo)
       .attr("d", path);
 
   svg.append("clipPath")
