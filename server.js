@@ -31,7 +31,7 @@ client.connect(function(err) {
 /* Router */
 var router = {
   index: require('./routes/index'),
-  landing: require('./routes/landing'),
+  map: require('./routes/map'),
   //citysearch: require('./routes/citysearch'),
   db: {
     setup: function(req,res,next) {
@@ -61,9 +61,7 @@ app.set('port', process.env.PORT || 3000);
 
 /* Routes */
 app.get('/', router.index.view);
-app.get('/landing', router.landing.view);
-//app.get('/autocomp', router.index.autocomp);
-//app.get('/citysearch', router.citysearch.view);
+app.get('/map', router.map.view);
 
 
 /* Listen on port */
