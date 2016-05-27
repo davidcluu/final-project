@@ -4,6 +4,7 @@ var http = require('http');
 var path = require('path');
 var handlebars = require('express-handlebars');
 var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var dotenv = require('dotenv');
 var pg = require('pg');
@@ -50,9 +51,11 @@ app.set('views', __dirname + '/views');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(session({ secret: 'final project',
                   saveUninitialized: true,
                   resave: true}));
+
 
 
 /* Port */
@@ -61,6 +64,7 @@ app.set('port', process.env.PORT || 3000);
 
 /* Routes */
 app.get('/', router.index.view);
+app.post('/', router.index.saveSess);
 app.get('/map', router.map.view);
 
 

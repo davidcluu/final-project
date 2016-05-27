@@ -9,7 +9,7 @@
     // for FB.getLoginStatus().
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
-      //apiCall();
+      apiCall();
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
       document.getElementById('status').innerHTML = 'Please log ' +
@@ -68,13 +68,14 @@
   }(document, 'script', 'facebook-jssdk'));
   // Here we run a very simple test of the Graph API after login is
   // successful.  See statusChangeCallback() for when this call is made.
-  /*function apiCall() {
+  function apiCall() {
     FB.getAuthResponse();
-    FB.api('/me', 'GET',  {"fields":"name,id,email"},  function(response)
+    FB.api('/me', 'GET',  {"fields":"id"},  function(response)
     {
-            pics[i].src = response.picture.data.url;
-            names[i].innerHTML = response.name;
+      $.post('/', {id:response.id},function(data){        
+            
+      });
         
     });
-  }*/
+  }
 </script>
