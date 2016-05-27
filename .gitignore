@@ -38,3 +38,6 @@ jspm_packages
 .env
 dbpath
 log
+
+# sass
+*.css.map
