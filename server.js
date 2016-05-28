@@ -7,6 +7,8 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var dotenv = require('dotenv');
+
+var mongoose = require("mongoose");
 var pg = require('pg');
 
 
@@ -19,12 +21,24 @@ dotenv.load();
 
 
 /* Database */
-var conString = process.env.DATABASE_CONNECTION_URL;
+var models = require("./models");
+var db = mongoose.connection;
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://127.0.0.1/pollr');
+db.on('error', function(){
+  console.error('Mongo Error')
+});
+db.once('open', function(callback) {
+    console.log("Mongo: Database connected successfully");
+});
 
+var conString = process.env.DATABASE_CONNECTION_URL;
 var client = new pg.Client(conString);
 client.connect(function(err) {
   if(err) {
-    console.error('DB Error: Could not connect to database');
+    console.error('Postgres Error: Could not connect to database');
+  }
+  else {
+    console.error('Postgres: Database connected successfully');
   }
 });
 
@@ -33,13 +47,12 @@ client.connect(function(err) {
 var router = {
   index: require('./routes/index'),
   map: require('./routes/map'),
-  //citysearch: require('./routes/citysearch'),
+  auth: require('./routes/auth'),
   db: {
     setup: function(req,res,next) {
       req.dbclient = client;
       next();
     }
-    //,access: require('./routes/db')
   }
 };
 
@@ -64,8 +77,9 @@ app.set('port', process.env.PORT || 3000);
 
 /* Routes */
 app.get('/', router.index.view);
-app.post('/', router.index.saveSess);
 app.get('/map', router.map.view);
+
+app.post('/fblogin', router.auth.createOrLoginFBUser);
 
 
 /* Listen on port */
