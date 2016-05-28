@@ -80,6 +80,7 @@ app.get('/', router.index.view);
 app.get('/map', router.map.view);
 
 app.post('/fblogin', router.auth.createOrLoginFBUser);
+app.post('/fblogout', router.auth.logoutFBUser);
 
 
 /* Listen on port */

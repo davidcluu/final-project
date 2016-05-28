@@ -9,8 +9,6 @@ exports.createOrLoginFBUser = function(req, res) {
 
       // User not found
       if(!user) {
-        console.log("User not found")
-
         var newUser = new models.FBUser({
           'facebookID': profile.id,
           'name': profile.name
@@ -23,8 +21,6 @@ exports.createOrLoginFBUser = function(req, res) {
       }
       // Update user info
       else {
-        console.log("User found")
-
         user.facebookID = profile.id;
         user.name = profile.name;
 
@@ -40,4 +36,11 @@ exports.createOrLoginFBUser = function(req, res) {
   
     res.sendStatus(200)
   }
+}
+
+exports.logoutFBUser = function(req,res) {
+  req.session.name = ''
+  req.session.user_id = ''
+
+  res.sendStatus(200)
 }
