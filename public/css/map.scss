@@ -1,0 +1,73 @@
+@import "variables";
+
+@media (min-width: 1024px) {
+   .results, .map{
+      width: 50%;
+      height: calc(100% - 54px); /* minus height of nav bar */
+      overflow: auto;
+   }
+}
+
+.map-container {
+   @include half-container($light-blue);
+   left: 0;
+}
+
+.results-container {
+   @include half-container($bright-blue);
+   right: 0;
+}
+
+#results-content {
+   padding-top: 80px;
+}
+
+/* search bar */
+input[type="text"], textarea {
+outline: none;
+box-shadow:none !important;
+}
+
+.row {
+   margin-left: 0;
+   margin-right: 0;
+}
+
+.btn {
+   border-left: 1px solid $grey;
+   background-color: white;
+}
+
+.form-control {
+   box-shadow: none;
+   border: none;
+   border-radius: 0px;
+}
+
+.search-bar-bg {
+   padding: 7px 0px;
+   background-color: white;
+   border-bottom: 1px solid $grey;
+   position: fixed;
+}
+
+/* panels */
+.panel {
+   margin-left: auto;
+   margin-right: auto;
+   border: none;
+}
+
+.results-panel {
+   width: 90%;
+}
+
+.panel-heading {
+   background-color: $lavander;
+   border-radius: 0;
+}
+
+.panel-body {
+   background-color: white;
+   border: 1px solid $dark-blue;
+}

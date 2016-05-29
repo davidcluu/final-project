@@ -48,6 +48,8 @@ client.connect(function(err) {
 var router = {
   index: require('./routes/index'),
   map: require('./routes/map'),
+  results: require('./routes/results'),
+  //citysearch: require('./routes/citysearch'),
   auth: require('./routes/auth'),
   db: {
     setup: function(req,res,next) {
@@ -79,6 +81,7 @@ app.set('port', process.env.PORT || 3000);
 /* Routes */
 app.get('/', router.index.view);
 app.get('/map', router.map.view);
+app.get('/results', router.results.view);
 
 app.post('/fblogin', router.auth.createOrLoginFBUser);
 app.post('/fblogout', router.auth.logoutFBUser);

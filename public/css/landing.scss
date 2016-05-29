@@ -29,7 +29,6 @@ h6 {
 }
 
 #landing-image {
-    //  @include landing-section($periwinkle);
     background-color: $periwinkle;
 }
 
@@ -56,11 +55,11 @@ h6 {
 }
 
 #primer {
-    @include landing-section(white);
+    background-color: white;
 }
 
 #so-what {
-    @include landing-section($light-blue);
+    background-color: $light-blue;
     color: $grey;
     text-align: center;
     h2 {
