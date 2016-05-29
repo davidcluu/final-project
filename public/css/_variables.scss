@@ -15,12 +15,14 @@ $red: #E51D2E;
 $red-orange: #FD504A;
 
 // mixins
-@mixin landing-section($color) {
-   background: $color;
-}
 
 @mixin heading($align, $weight, $color: $black) {
    text-align: $align;
    font-weight: $weight;
    color: $color;
+}
+
+@mixin half-container($color) {
+   position: absolute;
+   background-color: $color;
 }
