@@ -70,4 +70,76 @@ footer {
 .filter {
   display: table; }
 
+/* landing page */
+body,
+html {
+  height: 100%;
+  font-family: "Muli", Helvetica, sans-serif;
+  color: #4A4A4A; }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Playfair Display", Georgia, serif; }
+
+.content-container {
+  padding: 80px 150px; }
+  .content-container h2 {
+    text-align: center;
+    font-weight: 700;
+    color: #15A8E0;
+    font-style: italic; }
+  .content-container h3 {
+    text-align: left;
+    font-weight: 400;
+    color: #FD504A; }
+  .content-container h4 {
+    text-align: center;
+    font-weight: 300;
+    color: #4A4A4A; }
+
+#landing-image {
+  background-color: #4A90E2; }
+
+#call-to-action {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  color: white; }
+  #call-to-action h1 {
+    font-size: 48px; }
+  #call-to-action a {
+    color: white; }
+    #call-to-action a button {
+      padding: 15px 30px;
+      background-color: #4A90E2;
+      border-radius: 3px;
+      border: none; }
+    #call-to-action a button:hover {
+      background-color: #A0CCFF; }
+
+#primer {
+  background-color: white; }
+
+#so-what {
+  background-color: #15A8E0;
+  color: #F2F2F2;
+  text-align: center; }
+  #so-what h2 {
+    color: white; }
+  #so-what a {
+    color: white; }
+    #so-what a button {
+      padding: 15px 30px;
+      background-color: #64D4FF;
+      border-radius: 3px;
+      border: none; }
+    #so-what a button:hover {
+      background-color: #1399CC; }
+
+/* end landing page */
+
 /*# sourceMappingURL=style.css.map */

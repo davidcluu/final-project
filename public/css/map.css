@@ -1,3 +1,15 @@
+/* map styling */
+path {
+  stroke-linejoin: round;
+  stroke-linecap: round; }
+
+.district-boundaries {
+  pointer-events: none;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 1px; }
+
+/* styling for the results */
 @media (min-width: 1024px) {
   .results, .map {
     width: 50%;
