@@ -1,7 +1,7 @@
 @media (min-width: 1024px) {
   .results, .map {
     width: 50%;
-    height: calc(100% - 54px);
+    height: calc(100% - 50px);
     /* minus height of nav bar */
     overflow: auto; } }
 .map-container {
@@ -11,11 +11,18 @@
 
 .results-container {
   position: absolute;
-  background-color: #64D4FF;
+  background-color: #F2F2F2;
   right: 0; }
 
 #results-content {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
   padding-top: 80px; }
+  #results-content h2 {
+    font-style: italic;
+    font-weight: 700;
+    color: #FD504A; }
 
 /* search bar */
 input[type="text"], textarea {
@@ -39,16 +46,12 @@ input[type="text"], textarea {
   padding: 7px 0px;
   background-color: white;
   border-bottom: 1px solid #F2F2F2;
-  position: fixed; }
+  position: fixed;
+  box-shadow: 1px 1px 3px rgba(153, 153, 153, 0.9); }
 
 /* panels */
 .panel {
-  margin-left: auto;
-  margin-right: auto;
   border: none; }
-
-.results-panel {
-  width: 90%; }
 
 .panel-heading {
   background-color: #A0CCFF;
@@ -56,6 +59,13 @@ input[type="text"], textarea {
 
 .panel-body {
   background-color: white;
-  border: 1px solid #1399CC; }
+  border: 1px solid #F2F2F2; }
+  .panel-body h6 {
+    color: #FD504A;
+    font-family: "Muli", Helvetica, sans-serif;
+    text-transform: uppercase;
+    font-weight: 700; }
+  .panel-body p {
+    font-size: 36px; }
 
 /*# sourceMappingURL=map.css.map */

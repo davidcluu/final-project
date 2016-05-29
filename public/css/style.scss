@@ -4,13 +4,32 @@
     z-index: 9999;
     background: none;
     margin: 0;
-    a {
-        font-family: $body-font;
-    }
+    background-color: $black;
+    border: none;
+    border-radius: 0;
+    .navbar-header {
+      a {
+         color: $bright-blue;
+      }
+      a:hover {
+         color: transparentize($bright-blue, 0.7);
+      }
+   }
+    .navbar-nav {
+      li {
+         a {
+             font-family: $body-font;
+             color: $bright-blue;
+         }
+         a:hover {
+            color: transparentize($bright-blue, 0.7);
+         }
+      }
+   }
 }
 /* footer */
 footer {
-    height: 80px;
+    height: 70px;
     line-height: 80px;
     text-align: center;
     background-color: $black;
