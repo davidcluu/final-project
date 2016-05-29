@@ -1,11 +1,12 @@
 /* Dependencies */
 var express = require('express');
+var session = require('express-session');
+var handlebars = require('express-handlebars');
 var http = require('http');
 var path = require('path');
-var handlebars = require('express-handlebars');
+
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
-var session = require('express-session');
 var dotenv = require('dotenv');
 
 var mongoose = require("mongoose");
