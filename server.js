@@ -4,8 +4,11 @@ var http = require('http');
 var path = require('path');
 var handlebars = require('express-handlebars');
 var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var dotenv = require('dotenv');
+
+var mongoose = require("mongoose");
 var pg = require('pg');
 
 
@@ -18,12 +21,24 @@ dotenv.load();
 
 
 /* Database */
-var conString = process.env.DATABASE_CONNECTION_URL;
+var models = require("./models");
+var db = mongoose.connection;
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://127.0.0.1/pollr');
+db.on('error', function(){
+  console.error('Mongo Error')
+});
+db.once('open', function(callback) {
+    console.log("Mongo: Database connected successfully");
+});
 
+var conString = process.env.DATABASE_CONNECTION_URL;
 var client = new pg.Client(conString);
 client.connect(function(err) {
   if(err) {
-    console.error('DB Error: Could not connect to database');
+    console.error('Postgres Error: Could not connect to database');
+  }
+  else {
+    console.error('Postgres: Database connected successfully');
   }
 });
 
@@ -34,12 +49,12 @@ var router = {
   map: require('./routes/map'),
   results: require('./routes/results'),
   //citysearch: require('./routes/citysearch'),
+  auth: require('./routes/auth'),
   db: {
     setup: function(req,res,next) {
       req.dbclient = client;
       next();
     }
-    //,access: require('./routes/db')
   }
 };
 
@@ -51,9 +66,11 @@ app.set('views', __dirname + '/views');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(session({ secret: 'final project',
                   saveUninitialized: true,
                   resave: true}));
+
 
 
 /* Port */
@@ -64,6 +81,9 @@ app.set('port', process.env.PORT || 3000);
 app.get('/', router.index.view);
 app.get('/map', router.map.view);
 app.get('/results', router.results.view);
+
+app.post('/fblogin', router.auth.createOrLoginFBUser);
+app.post('/fblogout', router.auth.logoutFBUser);
 
 
 /* Listen on port */
