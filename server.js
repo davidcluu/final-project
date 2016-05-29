@@ -48,7 +48,6 @@ client.connect(function(err) {
 var router = {
   index: require('./routes/index'),
   map: require('./routes/map'),
-  results: require('./routes/results'),
   //citysearch: require('./routes/citysearch'),
   auth: require('./routes/auth'),
   db: {
