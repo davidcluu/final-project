@@ -93,12 +93,23 @@ function ready(error, sd, congress) {
  */
 
 var district_defaultFill = '#ddd'
+var district_defaultMouseoverFill = {
+  6 : {
+    49 : 'red',
+    50 : 'yellow',
+    51 : 'green',
+    52 : 'purple',
+    53 : 'blue'
+  }
+}
+
+var district_mouseoverFill = district_defaultMouseoverFill;
 
 function district_onMouseOver(me) {
   var $me = $(me)
   var geoId = district_getGeoId($me)
 
-  $me.css('fill', 'cyan')
+  $me.css('fill', district_mouseoverFill[geoId.state][geoId.district]);
 }
 
 function district_onMouseOut(me) {
