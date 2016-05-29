@@ -44,8 +44,8 @@ function ready(error, sd, congress) {
   var hscale = scale*width  / (bounds[1][0] - bounds[0][0]);
   var vscale = scale*height / (bounds[1][1] - bounds[0][1]);
   var scale  = (hscale < vscale) ? hscale : vscale;
-  var offset  = [width + margin/2 - (bounds[0][0] + bounds[1][0])/2,
-                 height + margin/2 - (bounds[0][1] + bounds[1][1])/2];
+  var offset  = [width + margin - (bounds[0][0] + bounds[1][0])/2,
+                 height + margin - (bounds[0][1] + bounds[1][1])/2];
 
   projection = d3.geo.mercator()
                   .center(center)
@@ -53,6 +53,9 @@ function ready(error, sd, congress) {
                   .translate(offset);
 
   path = path.projection(projection);
+
+  /* Filter out congress districts we don't want */
+  congress.objects.districts.geometries = congress.objects.districts.geometries.filter(filterDistricts)
 
   /* Define the clipping area */
   svg.append('defs').append('path')
@@ -85,6 +88,14 @@ function ready(error, sd, congress) {
       .attr('class', 'district-boundaries')
       .datum(topojson.mesh(congress, congress.objects.districts, function(a, b) { return a !== b && (a.id / 1000 | 0) === (b.id / 1000 | 0); }))
       .attr('d', path);
+}
+
+/*
+ * Helper Functions
+ */
+
+function filterDistricts(d) {
+  return d.id >= 649 && d.id <= 653
 }
 
 

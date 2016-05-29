@@ -8,10 +8,6 @@
       version    : 'v2.5'
     });
 
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-    });
-
     FB.Event.subscribe("auth.login", function() {
       FB.getAuthResponse();
       FB.api('/me', 'GET',  function(response){
