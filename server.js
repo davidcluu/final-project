@@ -80,7 +80,6 @@ app.set('port', process.env.PORT || 3000);
 /* Routes */
 app.get('/', router.index.view);
 app.get('/map', router.map.view);
-app.get('/results', router.results.view);
 
 app.post('/fblogin', router.auth.createOrLoginFBUser);
 app.post('/fblogout', router.auth.logoutFBUser);
