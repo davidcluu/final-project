@@ -41,7 +41,7 @@ path {
    h2 {
       font-style: italic;
       font-weight: 700;
-      color: $red-orange;
+      color: $light-blue;
    }
 }
 
@@ -68,6 +68,7 @@ box-shadow:none !important;
 }
 
 .search-bar-bg {
+   z-index: 999;
    padding: 7px 0px;
    background-color: white;
    border-bottom: 1px solid $grey;
@@ -95,6 +96,10 @@ box-shadow:none !important;
       font-weight: 700;
    }
    p {
-      font-size: 36px;
+      font-size: 2em;
    }
+}
+
+#rep-name {
+   color: $light-blue;
 }

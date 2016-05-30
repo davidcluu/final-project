@@ -1,4 +1,11 @@
 @import "variables";
+body,
+html {
+    height: 100%;
+    font-family: $body-font;
+    color: $black;
+}
+
 /* navbar */
 .navbar-default {
     z-index: 9999;
@@ -10,6 +17,7 @@
     .navbar-header {
       a {
          color: $bright-blue;
+         @include link-transition;
       }
       a:hover {
          color: transparentize($bright-blue, 0.7);
@@ -20,6 +28,7 @@
          a {
              font-family: $body-font;
              color: $bright-blue;
+             @include link-transition;
          }
          a:hover {
             color: transparentize($bright-blue, 0.7);
@@ -30,7 +39,7 @@
 /* footer */
 footer {
     height: 70px;
-    line-height: 80px;
+    line-height: 70px;
     text-align: center;
     background-color: $black;
     color: $grey;
@@ -83,12 +92,6 @@ footer {
 }
 
 /* landing page */
-body,
-html {
-    height: 100%;
-    font-family: $body-font;
-    color: $black;
-}
 h1,
 h2,
 h3,
@@ -131,6 +134,7 @@ h6 {
           background-color: $periwinkle;
           border-radius: 3px;
           border: none;
+          @include link-transition;
       }
       button:hover {
         background-color: $lavander;
@@ -156,6 +160,7 @@ h6 {
          background-color: $bright-blue;
          border-radius: 3px;
          border: none;
+         @include link-transition;
       }
       button:hover {
          background-color: $dark-blue;
