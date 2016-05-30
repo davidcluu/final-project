@@ -50,6 +50,7 @@ var router = {
   map: require('./routes/map'),
   //citysearch: require('./routes/citysearch'),
   auth: require('./routes/auth'),
+  api: require('./routes/api'),
   db: {
     setup: function(req,res,next) {
       req.dbclient = client;
@@ -83,6 +84,9 @@ app.get('/map', router.map.view);
 
 app.post('/fblogin', router.auth.createOrLoginFBUser);
 app.post('/fblogout', router.auth.logoutFBUser);
+
+app.post('/getLegislator', router.api.getLegislator);
+app.get('/getLegContributions', router.api.getLegContributions);
 
 
 /* Listen on port */
