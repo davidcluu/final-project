@@ -48,14 +48,14 @@ client.connect(function(err) {
 var router = {
   index: require('./routes/index'),
   map: require('./routes/map'),
-  //citysearch: require('./routes/citysearch'),
   auth: require('./routes/auth'),
   api: require('./routes/api'),
   db: {
     setup: function(req,res,next) {
       req.dbclient = client;
       next();
-    }
+    },
+    query: require('./routes/db')
   }
 };
 
@@ -87,6 +87,9 @@ app.post('/fblogout', router.auth.logoutFBUser);
 
 app.post('/getLegislator', router.api.getLegislator);
 app.get('/getLegContributions', router.api.getLegContributions);
+
+app.use('/delphiData/*', router.db.setup);
+app.get('/delphiData/getPopulationByDistrict', router.db.query.queryPopulationByDistrict);
 
 
 /* Listen on port */
