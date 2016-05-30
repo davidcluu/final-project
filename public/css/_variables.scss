@@ -7,16 +7,13 @@ $black: #4A4A4A;
 $grey: #F2F2F2;
 $periwinkle: #4A90E2;
 $lavander: #A0CCFF;
-$blue: #254DA3;
 $light-blue: #15A8E0;
 $bright-blue: #64D4FF;
 $dark-blue: #1399CC;
-$red: #E51D2E;
 $red-orange: #FD504A;
 
 // mixins
-
-@mixin heading($align, $weight, $color: $black) {
+@mixin heading($align, $weight: 400, $color: $black) {
    text-align: $align;
    font-weight: $weight;
    color: $color;
@@ -25,4 +22,9 @@ $red-orange: #FD504A;
 @mixin half-container($color) {
    position: absolute;
    background-color: $color;
+}
+
+@mixin link-transition {
+   -webkit-transition: all 0.3s ease-in-out; /* Safari */
+   transition: all 0.3s ease-in-out;
 }
