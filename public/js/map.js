@@ -18,6 +18,10 @@ queue()
   .defer(d3.json, '/data/ca-congress-114.json')
   .await(ready);
 
+$.post('/getLegislator', { district : "47"}, function(response) {
+    $('#rep').text(response.first_name)
+  });
+
 function ready(error, sd, congress) {
   if (error) throw error;
 
