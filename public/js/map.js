@@ -1,3 +1,5 @@
+(function(d3) {
+
 /*
  * Map
  */
@@ -142,3 +144,5 @@ function district_getGeoId(obj) {
 
   return { state: parseInt(state), district: parseInt(district) }
 }
+
+})(window.d3);
