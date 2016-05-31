@@ -4,6 +4,43 @@
 
 (function($, d3) {
 
+$.post('/getLegislator', { district : '50'}, function(response) {
+  var district = response.legislator.district
+  switch (district) {
+    case 49:
+    case 50:
+      $('#rep-cd').text(district + 'th')
+      break
+    case 51:
+      $('#rep-cd').text(district + 'st')
+      break
+    case 52:
+      $('#rep-cd').text(district + 'nd')
+      break
+    case 53:
+      $('#rep-cd').text(district + 'rd')
+      break
+    default:
+      console.error('District not in range!')
+  }
+  
+  $('#rep-firstname').text(response.legislator.first_name)
+  
+  $('#rep-lastname').text(response.legislator.last_name)
+  
+  var district = response.legislator.party
+  switch (district) {
+    case 'D':
+      $('#rep-party').text('Democratic')
+      break
+    case 'R':
+      $('#rep-party').text('Republican')
+      break
+    default:
+      console.error('District not in range!')
+  }
+});
+
 var parentWidth = $('#map').width(),
     parentHeight = window.innerHeight;
 
@@ -19,11 +56,7 @@ queue()
   .defer(d3.json, '/data/sd.json')
   .defer(d3.json, '/data/ca-congress-114.json')
   .await(mapReady);
-/*
-$.post('/getLegislator', { district : "47"}, function(response) {
-    $('#rep').text(response.first_name)
-  });
-*/
+
 function mapReady(err, sd, congress) {
   if (err) console.error(err);
 
