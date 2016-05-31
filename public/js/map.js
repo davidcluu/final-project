@@ -114,13 +114,15 @@ function drawMap() {
  */
 
 function drawDonut(id, data, color, speed) {
-  var width = $('#' + id).width(),
-      donutWidth = width / 5,
-      height = width,
-      radius = width / 2;
+  var donutWidth = $('#' + id).width(),
+      innerWidth = donutWidth / 5,
+      donutHeight = donutWidth,
+      radius = donutWidth / 2,
+      legendRectSize = 18,
+      legendSpacing = 4;
 
   var arc = d3.svg.arc()
-              .innerRadius(radius - donutWidth)
+              .innerRadius(radius - innerWidth)
               .outerRadius(radius);
 
   var pie = d3.layout.pie()
@@ -129,16 +131,18 @@ function drawDonut(id, data, color, speed) {
 
   var svg = d3.select('#' + id)
               .append('svg')
-                .attr('width', width)
-                .attr('height', height)
+                .attr('width', donutWidth)
+                .attr('height', donutHeight / 2 + (legendRectSize + legendRectSize) * 6)
               .append('g')
-                .attr('transform', 'translate(' + (width / 2) + ',' + (height / 2) + ')');
+                .attr('transform', 'translate(' + (donutWidth / 2) + ',' + (donutHeight / 2) + ')');
 
   var path = svg.selectAll('path')
                 .data(pie(data))
                 .enter().append('path')
                   .attr('d', arc)
                   .attr('fill', (_, i) => color(i) )
+                  .on('mouseover', (d) => console.log(d.data.label) )
+                  .on('mouseout', (d) => console.log('') )
                 .transition()
                 .duration(speed)
                 .attrTween('d', tweenDonut);
@@ -151,6 +155,28 @@ function drawDonut(id, data, color, speed) {
     var i = d3.interpolate(start, finish);
     return d => arc(i(d));
   }
+
+  var legend = svg.selectAll('#' + id + ' .legend')
+                  .data(data)
+                  .enter().append('g')
+                    .attr('class', 'legend')
+                    .attr('transform', function(d, i) {
+                      var height = legendRectSize + legendSpacing;
+                      var dx = -(donutWidth / 2);
+                      var dy = donutHeight / 2 + i * height + 20;
+                      return 'translate(' + dx + ',' + dy + ')';
+                    });
+
+  legend.append('rect')
+    .attr('width', legendRectSize)
+    .attr('height', legendRectSize)
+    .style('fill', (d,i) => color(i))
+    .style('stroke', (d,i) => color(i));
+
+  legend.append('text')
+    .attr('x', legendRectSize + legendSpacing)
+    .attr('y', legendRectSize - legendSpacing)
+    .text(function(d) { return d.label });
 }
 
 
