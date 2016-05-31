@@ -104,18 +104,18 @@ function filterDistricts(d) {
 
 function mapDone() {
   queue()
-  .defer(d3.json, '/delphiData/getPopulationByDistrict?district=50')
-  .defer(d3.json, '/delphiData/getPopulationByDistrict?district=50')
-  .defer(d3.json, '/delphiData/getPopulationByDistrict?district=50')
+  .defer(d3.json, '/delphiData/getPopulationByAge?district=50')
+  .defer(d3.json, '/delphiData/getPopulationByGender?district=50')
+  .defer(d3.json, '/delphiData/getPopulationByRace?district=50')
   .await(chartReady);
 }
 
 function chartReady(err, data1, data2, data3) {
   if (err) console.error(err);
 
-  drawDonut('chart1', data1, ['green', 'red'], 1000);
-  drawDonut('chart2', data2, ['yellow', 'purple'], 1500);
-  drawDonut('chart3', data3, ['orange', 'blue'], 2000);
+  drawDonut('chart1', data1, d3.scale.linear().domain([0, data1.length - 1]).interpolate(d3.interpolateRgb).range(['#48fbd7', '#e584f1']), 2000);
+  drawDonut('chart2', data2, d3.scale.linear().domain([0, data2.length - 1]).interpolate(d3.interpolateRgb).range(['#48fbd7', '#e584f1']), 2000);
+  drawDonut('chart3', data3, d3.scale.linear().domain([0, data3.length - 1]).interpolate(d3.interpolateRgb).range(['#48fbd7', '#e584f1']), 2000);
 }
 
 })(window.jQuery, window.d3);
@@ -125,14 +125,11 @@ function chartReady(err, data1, data2, data3) {
  * Helper Functions
  */
 
-function drawDonut(id, data, colors, speed) {
+function drawDonut(id, data, color, speed) {
   var width = $('#' + id).width(),
       donutWidth = width / 5,
       height = width,
       radius = width / 2;
-
-  var color = d3.scale.ordinal()
-                .range(colors); 
 
   var arc = d3.svg.arc()
               .innerRadius(radius - donutWidth)
@@ -153,7 +150,7 @@ function drawDonut(id, data, colors, speed) {
                 .data(pie(data))
                 .enter().append('path')
                   .attr('d', arc)
-                  .attr('fill', (d, i) => color(d.data.label) )
+                  .attr('fill', (_, i) => color(i) )
                 .transition()
                 .duration(speed)
                 .attrTween('d', tweenDonut);

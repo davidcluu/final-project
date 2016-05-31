@@ -92,7 +92,9 @@ app.post('/getLegislator', router.api.getLegislator);
 app.get('/getLegContributions', router.api.getLegContributions);
 
 app.use('/delphiData/*', router.db.setup);
-app.get('/delphiData/getPopulationByDistrict', router.db.query.queryPopulationByDistrict);
+app.get('/delphiData/getPopulationByAge', router.db.query.queryPopulationByAge);
+app.get('/delphiData/getPopulationByGender', router.db.query.queryPopulationByGender);
+app.get('/delphiData/getPopulationByRace', router.db.query.queryPopulationByRace);
 
 
 /* Listen on port */

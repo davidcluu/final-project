@@ -1,4 +1,30 @@
-exports.queryPopulationByDistrict = function (req, res) {
+exports.queryPopulationByAge = function (req, res) {
+  var district = parseInt(req.query.district)
+  var reducedSRAtoCDKeys = Object.keys(SRAtoCD).filter( d => SRAtoCD[d].indexOf(district) != -1 )
+
+  var query =
+    "SELECT \"Area\" AS area, \"Age\" AS age, \"Population\" AS population " +
+    "FROM cogs121_16_raw.hhsa_san_diego_demographics_county_popul_by_age_2012_norm d " +
+    "WHERE d.\"Area\" IN (" +
+      reducedSRAtoCDKeys
+        .map( d => ("'" + d + "'") )
+        .join(", ")
+    + ") " +
+    "AND NOT \"Age\" LIKE 'Any%'"
+
+  req.dbclient.query(query, function(err, result) {
+    if(err) tryReconnect(req, res, err)
+
+    var temp = {}
+    result.rows.forEach( function(d) { temp[d.age] = temp[d.age] ? temp[d.age] + d.population : d.population } )
+
+    var json = Object.keys(temp).map( (d) => ({label: d, count: temp[d]}) )
+
+    res.json(json)
+  });
+}
+
+exports.queryPopulationByGender = function (req, res) {
   var district = parseInt(req.query.district)
   var reducedSRAtoCDKeys = Object.keys(SRAtoCD).filter( d => SRAtoCD[d].indexOf(district) != -1 )
 
@@ -23,14 +49,33 @@ exports.queryPopulationByDistrict = function (req, res) {
     res.json(json)
   });
 }
-/*
-[
-    { label: 'One', count: 10 }, 
-    { label: 'Too', count: 20 },
-    { label: 'Tree', count: 30 },
-    { label: 'For', count: 40 }
-  ]
-*/
+
+exports.queryPopulationByRace = function (req, res) {
+  var district = parseInt(req.query.district)
+  var reducedSRAtoCDKeys = Object.keys(SRAtoCD).filter( d => SRAtoCD[d].indexOf(district) != -1 )
+
+  var query =
+    "SELECT \"Area\" AS area, \"Race\" AS race, \"Population\" AS population " +
+    "FROM cogs121_16_raw.hhsa_san_diego_demographics_county_popul_by_race_2012_norm d " +
+    "WHERE d.\"Area\" IN (" +
+      reducedSRAtoCDKeys
+        .map( d => ("'" + d + "'") )
+        .join(", ")
+    + ") " +
+    "AND NOT \"Race\" LIKE 'Any%'"
+
+  req.dbclient.query(query, function(err, result) {
+    if(err) tryReconnect(req, res, err)
+
+    var temp = {}
+    result.rows.forEach( function(d) { temp[d.race] = temp[d.race] ? temp[d.race] + d.population : d.population } )
+
+    var json = Object.keys(temp).map( (d) => ({label: d, count: temp[d]}) )
+
+    res.json(json)
+  });
+}
+
 /* Helper Functions */
 
 function tryReconnect(req, res, err) {
