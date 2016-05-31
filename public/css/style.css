@@ -156,6 +156,9 @@ h6 {
     #so-what a button:hover {
       background-color: #1399CC; }
 
+.hidden {
+  display: none; }
+
 /* end landing page */
 
 /*# sourceMappingURL=style.css.map */
