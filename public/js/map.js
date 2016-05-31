@@ -111,6 +111,8 @@ function mapDone() {
 }
 
 function chartReady(err, data1, data2, data3) {
+  if (err) console.error(err);
+  
   drawDonut('chart1', data1, ['green', 'red']);
   drawDonut('chart2', data2, ['yellow', 'purple']);
   drawDonut('chart3', data3, ['orange', 'blue']);
