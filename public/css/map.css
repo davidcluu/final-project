@@ -3,6 +3,9 @@ path {
   stroke-linejoin: round;
   stroke-linecap: round; }
 
+.currentDistrict {
+  fill: #888 !important; }
+
 .district-boundaries {
   pointer-events: none;
   fill: none;

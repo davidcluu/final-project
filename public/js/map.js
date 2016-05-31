@@ -87,10 +87,11 @@ function drawMap() {
       .enter()
         .append('path')
           .attr('d', path)
-        .attr('class', d => ('district ' + d.id) )
-        .attr('title', d => d.id )
+        .attr('id', d => d.id)
+        .attr('class', 'district')
+        .attr('title', d => d.id)
         .style('fill', district_defaultFill)
-        .attr('onclick', d => ('updateInfo(' + (d.id % 100) + ')'))
+        .attr('onclick', 'district_onClick(this)')
         .attr('onmouseover', 'district_onMouseOver(this)')
         .attr('onmouseout', 'district_onMouseOut(this)')
 
@@ -159,11 +160,11 @@ function drawDonut(id, data, color, speed) {
 var district_defaultFill = '#ddd'
 var district_defaultMouseoverFill = {
   6 : {
-    49 : 'red',
-    50 : 'yellow',
-    51 : 'green',
-    52 : 'purple',
-    53 : 'blue'
+    49 : '#888',
+    50 : '#888',
+    51 : '#888',
+    52 : '#888',
+    53 : '#888'
   }
 }
 
@@ -183,7 +184,17 @@ function district_onMouseOut(me) {
   $me.css('fill', district_defaultFill)
 }
 
-function updateInfo(district) {
+function district_onClick(me) {
+  var $me = $(me)
+  var district = district_getGeoId($me).district
+
+  if ($me.hasClass('currentDistrict')) {
+    return
+  }
+
+  $('.currentDistrict').removeClass('currentDistrict')
+  $me.addClass('currentDistrict')
+
   $.post('/getLegislator', { district : district}, function(response) {
     var district = response.legislator.district
     switch (district) {
@@ -242,7 +253,7 @@ function updateInfo(district) {
 
 function district_getGeoId(obj) {
   // obj.attr('class') = "district (district $)"
-  var geoid = obj.attr('class').substring(9)
+  var geoid = obj.attr('id')
   var state = geoid.slice(0,-2)
   var district = geoid.slice(-2)
 
