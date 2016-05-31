@@ -83,8 +83,8 @@ function mapReady(err, sd, congress) {
     .enter()
       .append('path')
         .attr('d', path)
-      .attr('class', function(d) { return 'district ' + d.id; })
-      .attr('title', function(d) { return d.id; })
+      .attr('class', d => ('district ' + d.id) )
+      .attr('title', d => d.id )
       .style('fill', district_defaultFill)
       .attr('onmouseover', 'district_onMouseOver(this)')
       .attr('onmouseout', 'district_onMouseOut(this)')
@@ -92,7 +92,7 @@ function mapReady(err, sd, congress) {
   /* Draw political district boundries */
   svg.append('path')
       .attr('class', 'district-boundaries')
-      .datum(topojson.mesh(congress, congress.objects.districts, function(a, b) { return a !== b && (a.id / 1000 | 0) === (b.id / 1000 | 0); }))
+      .datum(topojson.mesh(congress, congress.objects.districts, (a, b) => (a !== b && (a.id / 1000 | 0) === (b.id / 1000 | 0)) ))
       .attr('d', path);
 
   mapDone();
@@ -113,9 +113,9 @@ function mapDone() {
 function chartReady(err, data1, data2, data3) {
   if (err) console.error(err);
 
-  drawDonut('chart1', data1, d3.scale.linear().domain([0, data1.length - 1]).interpolate(d3.interpolateRgb).range(['#48fbd7', '#e584f1']), 2000);
-  drawDonut('chart2', data2, d3.scale.linear().domain([0, data2.length - 1]).interpolate(d3.interpolateRgb).range(['#48fbd7', '#e584f1']), 2000);
-  drawDonut('chart3', data3, d3.scale.linear().domain([0, data3.length - 1]).interpolate(d3.interpolateRgb).range(['#48fbd7', '#e584f1']), 2000);
+  drawDonut('chart1', data1, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data1.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
+  drawDonut('chart2', data2, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data2.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
+  drawDonut('chart3', data3, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data3.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
 }
 
 })(window.jQuery, window.d3);
@@ -137,7 +137,7 @@ function drawDonut(id, data, color, speed) {
 
   var pie = d3.layout.pie()
     .sort(null)
-    .value( (d) => d.count );
+    .value( d => d.count );
 
   var svg = d3.select('#' + id)
               .append('svg')
@@ -161,7 +161,7 @@ function drawDonut(id, data, color, speed) {
       endAngle: 0
     };
     var i = d3.interpolate(start, finish);
-    return (d) => arc(i(d));
+    return d => arc(i(d));
   }
 }
 
