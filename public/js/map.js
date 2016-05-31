@@ -18,14 +18,14 @@ var svg = d3.select('#map').append('svg')
 queue()
   .defer(d3.json, '/data/sd.json')
   .defer(d3.json, '/data/ca-congress-114.json')
-  .await(ready);
+  .await(mapReady);
 /*
 $.post('/getLegislator', { district : "47"}, function(response) {
     $('#rep').text(response.first_name)
   });
 */
-function ready(error, sd, congress) {
-  if (error) throw error;
+function mapReady(err, sd, congress) {
+  if (err) console.error(err);
 
   /* Retrieve features from the sd object */
   var sdgeo = topojson.feature(sd, sd.objects.land);
@@ -95,30 +95,25 @@ function ready(error, sd, congress) {
       .datum(topojson.mesh(congress, congress.objects.districts, function(a, b) { return a !== b && (a.id / 1000 | 0) === (b.id / 1000 | 0); }))
       .attr('d', path);
 
-  drawDonut('chart1', [
-    { label: 'One', count: 10 }, 
-    { label: 'Too', count: 20 },
-    { label: 'Tree', count: 30 },
-    { label: 'For', count: 40 }
-  ], ['#A60F2B', '#648C85', '#B3F2C9', '#528C18', '#C3F25C']);
-
-  drawDonut('chart2', [
-    { label: 'One', count: 10 }, 
-    { label: 'Too', count: 20 },
-    { label: 'Tree', count: 30 },
-    { label: 'For', count: 40 }
-  ], ['#A60F2B', '#648C85', '#B3F2C9', '#528C18', '#C3F25C']);
-
-  drawDonut('chart3', [
-    { label: 'One', count: 10 }, 
-    { label: 'Too', count: 20 },
-    { label: 'Tree', count: 30 },
-    { label: 'For', count: 40 }
-  ], ['#A60F2B', '#648C85', '#B3F2C9', '#528C18', '#C3F25C']);
+  mapDone();
 }
 
 function filterDistricts(d) {
   return d.id >= 649 && d.id <= 653
+}
+
+function mapDone() {
+  queue()
+  .defer(d3.json, '/delphiData/getPopulationByDistrict?district=50')
+  .defer(d3.json, '/delphiData/getPopulationByDistrict?district=50')
+  .defer(d3.json, '/delphiData/getPopulationByDistrict?district=50')
+  .await(chartReady);
+}
+
+function chartReady(err, data1, data2, data3) {
+  drawDonut('chart1', data1, ['green', 'red']);
+  drawDonut('chart2', data2, ['yellow', 'purple']);
+  drawDonut('chart3', data3, ['orange', 'blue']);
 }
 
 })(window.jQuery, window.d3);
