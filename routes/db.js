@@ -1,24 +1,36 @@
 exports.queryPopulationByDistrict = function (req, res) {
+  var district = parseInt(req.query.district)
+  var reducedSRAtoCDKeys = Object.keys(SRAtoCD).filter( d => SRAtoCD[d].indexOf(district) != -1 )
+
   var query =
-    "SELECT \"Area\", \"Gender\", \"Population\" " +
+    "SELECT \"Area\" AS area, \"Gender\" AS gender, \"Population\" AS population " +
     "FROM cogs121_16_raw.hhsa_san_diego_demographics_county_popul_by_gender_2012_norm d " +
-    "WHERE d.\"Area\" IN (" + Object.keys(SRAtoCD).map( d => ("'" + d + "'") ).join(", ") + ") " +
+    "WHERE d.\"Area\" IN (" +
+      reducedSRAtoCDKeys
+        .map( d => ("'" + d + "'") )
+        .join(", ")
+    + ") " +
     "AND NOT \"Gender\" LIKE 'Any%'"
 
   req.dbclient.query(query, function(err, result) {
     if(err) tryReconnect(req, res, err)
 
-    var json = {}
-    Object.keys(SRAtoCD).forEach( function(d) { json[d] = {}; } )
+    var temp = {}
+    result.rows.forEach( function(d) { temp[d.gender] = temp[d.gender] ? temp[d.gender] + d.population : d.population } )
 
-    result.rows.forEach(function(d){
-      json[d.Area][d.Gender] = d.Population
-    })
+    var json = Object.keys(temp).map( (d) => ({label: d, count: temp[d]}) )
 
-    res.json(json);
+    res.json(json)
   });
 }
-
+/*
+[
+    { label: 'One', count: 10 }, 
+    { label: 'Too', count: 20 },
+    { label: 'Tree', count: 30 },
+    { label: 'For', count: 40 }
+  ]
+*/
 /* Helper Functions */
 
 function tryReconnect(req, res, err) {
