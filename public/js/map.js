@@ -113,7 +113,8 @@ function drawMap() {
  * Helper Functions
  */
 
-function drawDonut(id, data, color, speed) {
+function drawDonut(id, title, data, color, speed) {
+  /* Donut Chart */
   var donutWidth = $('#' + id).width(),
       innerWidth = donutWidth / 5,
       donutHeight = donutWidth,
@@ -141,8 +142,8 @@ function drawDonut(id, data, color, speed) {
                 .enter().append('path')
                   .attr('d', arc)
                   .attr('fill', (_, i) => color(i) )
-                  .on('mouseover', (d) => console.log(d.data.label) )
-                  .on('mouseout', (d) => console.log('') )
+                  .on('mouseover', (d) => $('#' + id + ' .title').text(d.data.label) )
+                  .on('mouseout', (d) => $('#' + id + ' .title').text(title) )
                 .transition()
                 .duration(speed)
                 .attrTween('d', tweenDonut);
@@ -155,6 +156,16 @@ function drawDonut(id, data, color, speed) {
     var i = d3.interpolate(start, finish);
     return d => arc(i(d));
   }
+
+  /* Title */
+
+  svg.append('text')
+    .attr('class', 'title')
+    .attr('text-anchor', 'middle')
+    .attr('dominant-baseline', 'middle')
+    .text(title)
+
+  /* Legend */
 
   var legend = svg.selectAll('#' + id + ' .legend')
                   .data(data)
@@ -275,9 +286,9 @@ function district_onClick(me) {
     $('#chart2').empty()
     $('#chart3').empty()
 
-    drawDonut('chart1', data1, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data1.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
-    drawDonut('chart2', data2, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data2.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
-    drawDonut('chart3', data3, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data3.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
+    drawDonut('chart1', 'Age', data1, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data1.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
+    drawDonut('chart2', 'Gender', data2, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data2.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
+    drawDonut('chart3', 'Race', data3, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data3.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
   }
 }
 
