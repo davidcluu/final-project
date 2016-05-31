@@ -48,6 +48,7 @@ client.connect(function(err) {
 var router = {
   index: require('./routes/index'),
   map: require('./routes/map'),
+  forum: require('./routes/forum'),
   auth: require('./routes/auth'),
   api: require('./routes/api'),
   db: {
@@ -81,6 +82,8 @@ app.set('port', process.env.PORT || 3000);
 /* Routes */
 app.get('/', router.index.view);
 app.get('/map', router.map.view);
+
+app.get('/forum', router.forum.view);
 
 app.post('/fblogin', router.auth.createOrLoginFBUser);
 app.post('/fblogout', router.auth.logoutFBUser);
