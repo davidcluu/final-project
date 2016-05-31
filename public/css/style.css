@@ -132,6 +132,10 @@ h6 {
 
 #primer {
   background-color: white; }
+  #primer img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto; }
 
 #so-what {
   background-color: #15A8E0;
