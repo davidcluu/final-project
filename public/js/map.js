@@ -87,13 +87,14 @@ function drawMap() {
       .enter()
         .append('path')
           .attr('d', path)
-        .attr('id', d => d.id)
-        .attr('class', 'district')
-        .attr('title', d => d.id)
-        .style('fill', district_defaultFill)
-        .attr('onclick', 'district_onClick(this)')
-        .attr('onmouseover', 'district_onMouseOver(this)')
-        .attr('onmouseout', 'district_onMouseOut(this)')
+          .attr('id', d => d.id)
+          .attr('class', 'district')
+          .attr('title', d => d.id)
+          .attr('onclick', 'district_onClick(this)')
+          .attr('onmouseover', 'district_onMouseOver(this)')
+          .attr('onmouseout', 'district_onMouseOut(this)')
+          .style('fill', district_defaultFill)
+          .style('cursor', 'pointer')
 
     /* Draw political district boundries */
     svg.append('path')
@@ -102,9 +103,7 @@ function drawMap() {
         .attr('d', path);
   }
 
-  function filterDistricts(d) {
-    return d.id >= 649 && d.id <= 653
-  }
+  filterDistricts = (d) => (d.id >= 649 && d.id <= 653)
 }
 
 
@@ -112,14 +111,17 @@ function drawMap() {
  * Helper Functions
  */
 
-function drawDonut(id, data, color, speed) {
-  var width = $('#' + id).width(),
-      donutWidth = width / 5,
-      height = width,
-      radius = width / 2;
+function drawDonut(id, title, data, color, speed) {
+  /* Donut Chart */
+  var donutWidth = $('#' + id).width(),
+      innerWidth = donutWidth / 5,
+      donutHeight = donutWidth,
+      radius = donutWidth / 2,
+      legendRectSize = 18,
+      legendSpacing = 4;
 
   var arc = d3.svg.arc()
-              .innerRadius(radius - donutWidth)
+              .innerRadius(radius - innerWidth)
               .outerRadius(radius);
 
   var pie = d3.layout.pie()
@@ -128,16 +130,18 @@ function drawDonut(id, data, color, speed) {
 
   var svg = d3.select('#' + id)
               .append('svg')
-                .attr('width', width)
-                .attr('height', height)
+                .attr('width', donutWidth)
+                .attr('height', donutHeight / 2 + (legendRectSize + legendRectSize) * 6)
               .append('g')
-                .attr('transform', 'translate(' + (width / 2) + ',' + (height / 2) + ')');
+                .attr('transform', 'translate(' + (donutWidth / 2) + ',' + (donutHeight / 2) + ')');
 
   var path = svg.selectAll('path')
                 .data(pie(data))
                 .enter().append('path')
                   .attr('d', arc)
                   .attr('fill', (_, i) => color(i) )
+                  .on('mouseover', d => $('#' + id + ' .title').text(d.data.label) )
+                  .on('mouseout', d => $('#' + id + ' .title').text(title) )
                 .transition()
                 .duration(speed)
                 .attrTween('d', tweenDonut);
@@ -150,6 +154,33 @@ function drawDonut(id, data, color, speed) {
     var i = d3.interpolate(start, finish);
     return d => arc(i(d));
   }
+
+  /* Title */
+
+  svg.append('text')
+    .attr('class', 'title')
+    .attr('text-anchor', 'middle')
+    .attr('dominant-baseline', 'middle')
+    .text(title)
+
+  /* Legend */
+
+  var legend = svg.selectAll('#' + id + ' .legend')
+                  .data(data)
+                  .enter().append('g')
+                    .attr('class', 'legend')
+                    .attr('transform', (d, i) => ('translate(' + -(donutWidth / 2) + ',' + (donutHeight / 2 + i * (legendRectSize + legendSpacing) + 20) + ')') );
+
+  legend.append('rect')
+    .attr('width', legendRectSize)
+    .attr('height', legendRectSize)
+    .style('fill', (d,i) => color(i) )
+    .style('stroke', (d,i) => color(i) );
+
+  legend.append('text')
+    .attr('x', legendRectSize + legendSpacing)
+    .attr('y', legendRectSize - legendSpacing)
+    .text( d => d.label );
 }
 
 
@@ -189,10 +220,13 @@ function district_onClick(me) {
   var district = district_getGeoId($me).district
 
   if ($me.hasClass('currentDistrict')) {
-    return
+    return;
   }
 
+  $('.currentDistrict').css('cursor', 'pointer')
   $('.currentDistrict').removeClass('currentDistrict')
+
+  $me.css('cursor', '')
   $me.addClass('currentDistrict')
 
   $.post('/getLegislator', { district : district}, function(response) {
@@ -245,9 +279,9 @@ function district_onClick(me) {
     $('#chart2').empty()
     $('#chart3').empty()
 
-    drawDonut('chart1', data1, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data1.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
-    drawDonut('chart2', data2, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data2.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
-    drawDonut('chart3', data3, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data3.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
+    drawDonut('chart1', 'Age', data1, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data1.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
+    drawDonut('chart2', 'Gender', data2, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data2.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
+    drawDonut('chart3', 'Race', data3, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data3.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
   }
 }
 
