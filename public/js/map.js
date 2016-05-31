@@ -87,13 +87,14 @@ function drawMap() {
       .enter()
         .append('path')
           .attr('d', path)
-        .attr('id', d => d.id)
-        .attr('class', 'district')
-        .attr('title', d => d.id)
-        .style('fill', district_defaultFill)
-        .attr('onclick', 'district_onClick(this)')
-        .attr('onmouseover', 'district_onMouseOver(this)')
-        .attr('onmouseout', 'district_onMouseOut(this)')
+          .attr('id', d => d.id)
+          .attr('class', 'district')
+          .attr('title', d => d.id)
+          .attr('onclick', 'district_onClick(this)')
+          .attr('onmouseover', 'district_onMouseOver(this)')
+          .attr('onmouseout', 'district_onMouseOut(this)')
+          .style('fill', district_defaultFill)
+          .style('cursor', 'pointer')
 
     /* Draw political district boundries */
     svg.append('path')
@@ -189,10 +190,13 @@ function district_onClick(me) {
   var district = district_getGeoId($me).district
 
   if ($me.hasClass('currentDistrict')) {
-    return
+    return;
   }
 
+  $('.currentDistrict').css('cursor', 'pointer')
   $('.currentDistrict').removeClass('currentDistrict')
+
+  $me.css('cursor', '')
   $me.addClass('currentDistrict')
 
   $.post('/getLegislator', { district : district}, function(response) {
