@@ -112,10 +112,10 @@ function mapDone() {
 
 function chartReady(err, data1, data2, data3) {
   if (err) console.error(err);
-  
-  drawDonut('chart1', data1, ['green', 'red']);
-  drawDonut('chart2', data2, ['yellow', 'purple']);
-  drawDonut('chart3', data3, ['orange', 'blue']);
+
+  drawDonut('chart1', data1, ['green', 'red'], 1000);
+  drawDonut('chart2', data2, ['yellow', 'purple'], 1500);
+  drawDonut('chart3', data3, ['orange', 'blue'], 2000);
 }
 
 })(window.jQuery, window.d3);
@@ -125,7 +125,7 @@ function chartReady(err, data1, data2, data3) {
  * Helper Functions
  */
 
-function drawDonut(id, data, colors) {
+function drawDonut(id, data, colors, speed) {
   var width = $('#' + id).width(),
       donutWidth = width / 5,
       height = width,
@@ -155,7 +155,7 @@ function drawDonut(id, data, colors) {
                   .attr('d', arc)
                   .attr('fill', (d, i) => color(d.data.label) )
                 .transition()
-                .duration(2000)
+                .duration(speed)
                 .attrTween('d', tweenDonut);
 
   function tweenDonut(finish) {
