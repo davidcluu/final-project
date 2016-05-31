@@ -103,9 +103,7 @@ function drawMap() {
         .attr('d', path);
   }
 
-  function filterDistricts(d) {
-    return d.id >= 649 && d.id <= 653
-  }
+  filterDistricts = (d) => (d.id >= 649 && d.id <= 653)
 }
 
 
@@ -142,8 +140,8 @@ function drawDonut(id, title, data, color, speed) {
                 .enter().append('path')
                   .attr('d', arc)
                   .attr('fill', (_, i) => color(i) )
-                  .on('mouseover', (d) => $('#' + id + ' .title').text(d.data.label) )
-                  .on('mouseout', (d) => $('#' + id + ' .title').text(title) )
+                  .on('mouseover', d => $('#' + id + ' .title').text(d.data.label) )
+                  .on('mouseout', d => $('#' + id + ' .title').text(title) )
                 .transition()
                 .duration(speed)
                 .attrTween('d', tweenDonut);
@@ -171,23 +169,18 @@ function drawDonut(id, title, data, color, speed) {
                   .data(data)
                   .enter().append('g')
                     .attr('class', 'legend')
-                    .attr('transform', function(d, i) {
-                      var height = legendRectSize + legendSpacing;
-                      var dx = -(donutWidth / 2);
-                      var dy = donutHeight / 2 + i * height + 20;
-                      return 'translate(' + dx + ',' + dy + ')';
-                    });
+                    .attr('transform', (d, i) => ('translate(' + -(donutWidth / 2) + ',' + (donutHeight / 2 + i * (legendRectSize + legendSpacing) + 20) + ')') );
 
   legend.append('rect')
     .attr('width', legendRectSize)
     .attr('height', legendRectSize)
-    .style('fill', (d,i) => color(i))
-    .style('stroke', (d,i) => color(i));
+    .style('fill', (d,i) => color(i) )
+    .style('stroke', (d,i) => color(i) );
 
   legend.append('text')
     .attr('x', legendRectSize + legendSpacing)
     .attr('y', legendRectSize - legendSpacing)
-    .text(function(d) { return d.label });
+    .text( d => d.label );
 }
 
 
