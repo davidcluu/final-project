@@ -1,6 +1,5 @@
 exports.getLegislator = function(req, res) {
     var http = require('http');
-    console.log(req.body);
     url = "http://congress.api.sunlightfoundation.com/legislators?chamber=house&district="
     + req.body.district
     + "&apikey=2ba76c94bc2541eca760598a23f940a7";
@@ -23,11 +22,9 @@ exports.getLegislator = function(req, res) {
         // dump the raw data
         	data = JSON.parse(buffer);
         	result = data.results[0];
-        	console.log(result);
         	res.json({ "legislator" : result });
     	}); 
 	});
-	console.log(res.legislator);
 }
 
 exports.getLegContributions = function(req, res) {
