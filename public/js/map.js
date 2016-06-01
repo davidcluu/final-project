@@ -131,7 +131,7 @@ function drawDonut(id, title, data, color, speed) {
   var svg = d3.select('#' + id)
               .append('svg')
                 .attr('width', donutWidth)
-                .attr('height', donutHeight / 2 + (legendRectSize + legendRectSize) * 6)
+                .attr('height', (donutHeight) + ((legendRectSize + legendSpacing) * data.length) + 20)
               .append('g')
                 .attr('transform', 'translate(' + (donutWidth / 2) + ',' + (donutHeight / 2) + ')');
 
@@ -169,7 +169,7 @@ function drawDonut(id, title, data, color, speed) {
                   .data(data)
                   .enter().append('g')
                     .attr('class', 'legend')
-                    .attr('transform', (d, i) => ('translate(' + -(donutWidth / 2) + ',' + (donutHeight / 2 + i * (legendRectSize + legendSpacing) + 20) + ')') );
+                    .attr('transform', (d, i) => ('translate(' + -(donutWidth / 2) + ',' + (donutHeight / 2 + (i * (legendRectSize + legendSpacing)) + 20) + ')') );
 
   legend.append('rect')
     .attr('width', legendRectSize)
