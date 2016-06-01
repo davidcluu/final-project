@@ -3,8 +3,8 @@
 {{> metadata}}
 
 <body>
-  {{> facebook}}
-  {{> navbar}}
+    <!-- {{> facebook}} -->
+    {{> navbar}}
 
     <div id="landing-page">
         <div id="landing-image">
@@ -12,10 +12,12 @@
                 <div class="video-container">
                     <div class="filter">
                         <div id="call-to-action">
-                            <h1>Home Is Where Your District Is</h1>
-                            <h3>Learn more about your congressional district and get involved in local government.</h3>
+                            <h1 class="animate">Home Is Where Your District Is</h1>
+                            <h3 class="animate">Learn more about your congressional district and get involved in local government.</h3>
                             <br/>
-                            <a href="/map"><button type="button" name="button">Explore Your District</button></a>
+                            <a href="/map">
+                                <button class="animate" type="button" name="button">Explore Your District</button>
+                            </a>
                         </div>
                     </div>
                     <video autoplay loop class="fillWidth">
@@ -32,14 +34,16 @@
     <!--landing-image-->
 
     <div id="primer" class="container-fluid content-container">
-      <img src="/img/pollr-bear-star.svg" alt="pollr bear" width="150px" height="auto" />
+      <div class="animate">
+        <img src="/img/pollr-bear-star.svg" alt="pollr bear" width="150px" height="auto" />
         <h2>First Things, First</h2>
         <h4>A Primer on the U.S. House of Representatives</h4>
-        <div class="row">
+     </div>
+        <div class="row animate">
             <div class="col-md-6">
                 <h3>What is a Representative?</h3>
                 <p>A representative, also known as a congressman or congresswoman, is an elected official who serves a two-year term in the United States House of Representatives.</p>
-                <p>Each member of the House represents an allocated number of constituents as determined by the population of the state they represent. California holds 53 seats in the House, with 3 representatives from San Diego’s congressional districts.</p>
+                <p>Each member of the House represents an allocated number of constituents as determined by the population of the state they represent.</p>
             </div>
             <div class="col-md-6">
                 <h3>House Leadership</h3>
@@ -47,7 +51,7 @@
                 <p>Majority and minority leaders represent their respective parties on the House floor while whips assist their party’s leadership in managing the legislative program on the House floor.</p>
             </div>
         </div>
-        <div class="row">
+        <div class="row animate">
             <div class="col-md-6">
                 <h3>House Committees</h3>
                 <p>The House has 20 standing committees, all which considers bills and issues and recommends measures for consideration by the House.</p>
@@ -55,23 +59,30 @@
             </div>
             <div class="col-md-6">
                 <h3>Currently...</h3>
-                <p>California, the most populous state, holds 53 seats in the House, with 5 representatives from San Diego’s congressional districts. The majority party is the Republican party, holding 246 seats with the total number of voting representatives set in the Constitution at 435.</p>
+                <p>California, the most populous state, holds 53 seats in the House, with 5 representatives from San Diego’s congressional districts. The majority party is the Republican party, holding 246 seats with the total number of voting representatives
+                    set in the Constitution at 435.</p>
             </div>
         </div>
     </div>
 
     <div id="so-what" class="container-fluid content-container">
-      <img src="/img/pollr-bear-so-what.svg" width="150px" height="auto">
+      <div class="animate">
+        <img src="/img/pollr-bear-so-what.svg" width="150px" height="auto">
         <h2>So What?</h2>
-        <div class="row">
+     </div>
+        <div class="row animate">
             <div class="col-md-3"></div>
             <div class="col-md-6">
-                <p>Representatives have the responsibility of representing the interests of their constituents and who you vote into office helps determine the majority/minority party in the House. By getting involved in local government,
-                    you’re helping to determine the issues that are debated in Congress and passed into law.</p>
-                    <br/>
-                    <p>Check out some options below.</p>
-                    <a href="https://vote.usa.gov/"><button type="button" name="button">Register to Vote</button></a>
-                    <a href="/map"><button type="button" name="button">Explore Your District</button></a>
+                <p>Representatives have the responsibility of representing the interests of their constituents and who you vote into office helps determine the majority/minority party in the House. By getting involved in local government, you’re helping
+                    to determine the issues that are debated in Congress and passed into law.</p>
+                <br/>
+                <p>Check out some options below.</p>
+                <a href="https://vote.usa.gov/">
+                    <button type="button" name="button">Register to Vote</button>
+                </a>
+                <a href="/map">
+                    <button type="button" name="button">Explore Your District</button>
+                </a>
             </div>
             <div class="col-md-3"></div>
         </div>
@@ -82,6 +93,7 @@
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/video.js"></script>
+    <script src="/js/index.js"></script>
 </body>
 
 </html>

@@ -3,7 +3,7 @@
  */
 
 (function() {
-  drawMap()
+  drawMap();
 })();
 
 
@@ -94,7 +94,7 @@ function drawMap() {
           .attr('onmouseover', 'district_onMouseOver(this)')
           .attr('onmouseout', 'district_onMouseOut(this)')
           .style('fill', district_defaultFill)
-          .style('cursor', 'pointer')
+          .style('cursor', 'pointer');
 
     /* Draw political district boundries */
     svg.append('path')
@@ -103,9 +103,7 @@ function drawMap() {
         .attr('d', path);
   }
 
-  function filterDistricts(d) {
-    return d.id >= 649 && d.id <= 653
-  }
+  filterDistricts = (d) => (d.id >= 649 && d.id <= 653);
 }
 
 
@@ -133,7 +131,7 @@ function drawDonut(id, title, data, color, speed) {
   var svg = d3.select('#' + id)
               .append('svg')
                 .attr('width', donutWidth)
-                .attr('height', donutHeight / 2 + (legendRectSize + legendRectSize) * 6)
+                .attr('height', (donutHeight) + ((legendRectSize + legendSpacing) * data.length) + 20)
               .append('g')
                 .attr('transform', 'translate(' + (donutWidth / 2) + ',' + (donutHeight / 2) + ')');
 
@@ -142,8 +140,8 @@ function drawDonut(id, title, data, color, speed) {
                 .enter().append('path')
                   .attr('d', arc)
                   .attr('fill', (_, i) => color(i) )
-                  .on('mouseover', (d) => $('#' + id + ' .title').text(d.data.label) )
-                  .on('mouseout', (d) => $('#' + id + ' .title').text(title) )
+                  .on('mouseover', d => $('#' + id + ' .title').text(d.data.label) )
+                  .on('mouseout', d => $('#' + id + ' .title').text(title) )
                 .transition()
                 .duration(speed)
                 .attrTween('d', tweenDonut);
@@ -163,7 +161,7 @@ function drawDonut(id, title, data, color, speed) {
     .attr('class', 'title')
     .attr('text-anchor', 'middle')
     .attr('dominant-baseline', 'middle')
-    .text(title)
+    .text(title);
 
   /* Legend */
 
@@ -171,23 +169,18 @@ function drawDonut(id, title, data, color, speed) {
                   .data(data)
                   .enter().append('g')
                     .attr('class', 'legend')
-                    .attr('transform', function(d, i) {
-                      var height = legendRectSize + legendSpacing;
-                      var dx = -(donutWidth / 2);
-                      var dy = donutHeight / 2 + i * height + 20;
-                      return 'translate(' + dx + ',' + dy + ')';
-                    });
+                    .attr('transform', (d, i) => ('translate(' + -(donutWidth / 2) + ',' + (donutHeight / 2 + (i * (legendRectSize + legendSpacing)) + 20) + ')') );
 
   legend.append('rect')
     .attr('width', legendRectSize)
     .attr('height', legendRectSize)
-    .style('fill', (d,i) => color(i))
-    .style('stroke', (d,i) => color(i));
+    .style('fill', (d,i) => color(i) )
+    .style('stroke', (d,i) => color(i) );
 
   legend.append('text')
     .attr('x', legendRectSize + legendSpacing)
     .attr('y', legendRectSize - legendSpacing)
-    .text(function(d) { return d.label });
+    .text( d => d.label );
 }
 
 
@@ -274,10 +267,10 @@ function district_onClick(me) {
   });
 
   queue()
-  .defer(d3.json, '/delphiData/getPopulationByAge?district=' + district)
-  .defer(d3.json, '/delphiData/getPopulationByGender?district=' + district)
-  .defer(d3.json, '/delphiData/getPopulationByRace?district=' + district)
-  .await(chartReady);
+    .defer(d3.json, '/delphiData/getPopulationByAge?district=' + district)
+    .defer(d3.json, '/delphiData/getPopulationByGender?district=' + district)
+    .defer(d3.json, '/delphiData/getPopulationByRace?district=' + district)
+    .await(chartReady);
 
   function chartReady(err, data1, data2, data3) {
     if (err) console.error(err);
@@ -298,5 +291,5 @@ function district_getGeoId(obj) {
   var state = geoid.slice(0,-2)
   var district = geoid.slice(-2)
 
-  return { state: parseInt(state), district: parseInt(district) }
+  return { state: parseInt(state), district: parseInt(district) };
 }
