@@ -3,7 +3,7 @@
  */
 
 (function() {
-  drawMap()
+  drawMap();
 })();
 
 
@@ -94,7 +94,7 @@ function drawMap() {
           .attr('onmouseover', 'district_onMouseOver(this)')
           .attr('onmouseout', 'district_onMouseOut(this)')
           .style('fill', district_defaultFill)
-          .style('cursor', 'pointer')
+          .style('cursor', 'pointer');
 
     /* Draw political district boundries */
     svg.append('path')
@@ -103,7 +103,7 @@ function drawMap() {
         .attr('d', path);
   }
 
-  filterDistricts = (d) => (d.id >= 649 && d.id <= 653)
+  filterDistricts = (d) => (d.id >= 649 && d.id <= 653);
 }
 
 
@@ -161,7 +161,7 @@ function drawDonut(id, title, data, color, speed) {
     .attr('class', 'title')
     .attr('text-anchor', 'middle')
     .attr('dominant-baseline', 'middle')
-    .text(title)
+    .text(title);
 
   /* Legend */
 
@@ -267,10 +267,10 @@ function district_onClick(me) {
   });
 
   queue()
-  .defer(d3.json, '/delphiData/getPopulationByAge?district=' + district)
-  .defer(d3.json, '/delphiData/getPopulationByGender?district=' + district)
-  .defer(d3.json, '/delphiData/getPopulationByRace?district=' + district)
-  .await(chartReady);
+    .defer(d3.json, '/delphiData/getPopulationByAge?district=' + district)
+    .defer(d3.json, '/delphiData/getPopulationByGender?district=' + district)
+    .defer(d3.json, '/delphiData/getPopulationByRace?district=' + district)
+    .await(chartReady);
 
   function chartReady(err, data1, data2, data3) {
     if (err) console.error(err);
@@ -291,5 +291,5 @@ function district_getGeoId(obj) {
   var state = geoid.slice(0,-2)
   var district = geoid.slice(-2)
 
-  return { state: parseInt(state), district: parseInt(district) }
+  return { state: parseInt(state), district: parseInt(district) };
 }
