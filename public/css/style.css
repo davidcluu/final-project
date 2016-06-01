@@ -156,8 +156,8 @@ h6 {
     #so-what a button:hover {
       background-color: #1399CC; }
 
-.hidden {
-  display: none; }
+.animate {
+  position: relative; }
 
 /* end landing page */
 
