@@ -1,0 +1,26 @@
+{
+	"topic-thread": [
+		{
+			"icon": "Icon 1",
+			"categoryName": "Thread 1",
+			"count": 52,
+			"url": "thread1"
+		},
+		{
+			"icon": "Icon 2",
+			"categoryName": "Thread 2",
+			"count": 6,
+			"url": "thread2"
+		},
+		{
+			"icon": "Icon 3",
+			"categoryName": "Thread 3",
+			"count": 5,
+			"url": "thread3"
+		}
+	],
+
+	"breadcrumb": "thread",
+	"topicTitle": "Topic Feed",
+	"button": "Post"
+}

@@ -49,10 +49,10 @@
               </div>
             </thead>
             <tbody>
-              {{#each topic}}
+              {{#each topic-thread}}
               <tr>
                 <td>{{icon}}</td>
-                <td><a id="topicID" href="/topicfeed?={{id}}">{{categoryName}}</a></td>
+                <td><a id="topicID" href="/thread?={{id}}">{{categoryName}}</a></td>
                 <td>{{count}}</td>
               </tr>
               {{/each}}

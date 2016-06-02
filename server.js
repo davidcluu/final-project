@@ -50,6 +50,7 @@ var router = {
   map: require('./routes/map'),
   forum: require('./routes/forum'),
   topic: require('./routes/topic'),
+  topicfeed: require('./routes/topicfeed'),
   addTopic: require('./routes/addTopic'),
   thread: require('./routes/thread'),
   auth: require('./routes/auth'),
@@ -89,6 +90,7 @@ app.get('/map', router.map.view);
 app.get('/forum', router.forum.view);
 app.get('/topic', router.topic.view);
 app.get('/add-topic', router.addTopic.view);
+app.get('/topicfeed', router.topicfeed.view);
 app.get('/thread', router.thread.view);
 
 app.post('/fblogin', router.auth.createOrLoginFBUser);
