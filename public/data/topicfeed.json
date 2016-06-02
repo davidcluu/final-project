@@ -1,20 +1,20 @@
 {
 	"topic-thread": [
 		{
-			"icon": "Icon 1",
+			"user": "Bob Smith",
 			"categoryName": "Thread 1",
 			"count": 52,
 			"url": "thread1"
 		},
 		{
-			"icon": "Icon 2",
-			"categoryName": "Thread 2",
+			"user": "Sue Smith",
+			"categoryName": "Thread this is a moderatly long title 2",
 			"count": 6,
 			"url": "thread2"
 		},
 		{
-			"icon": "Icon 3",
-			"categoryName": "Thread 3",
+			"user": "Will Smith",
+			"categoryName": "Thread this a longer thread title and it is taking up space 3",
 			"count": 5,
 			"url": "thread3"
 		}

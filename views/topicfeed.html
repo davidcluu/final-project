@@ -26,65 +26,49 @@
     {{> facebook}} {{> navbar}}
 
   <div class="container">
-    <h2>Forum {{topicTitle}}</h2>
+    <div class="forum-header">
+      <h2>{{topicTitle}}</h2>
+      {{#if breadcrumb}}
+        <a href="/forum">Forum</a> > <b>{{breadcrumb}}</b> 
+      {{/if}}
+    </div>
     <div class="row">
 
       <!--category table-->
       <div class="col-md-8">
-        {{#if breadcrumb}}
-          <a href="/forum">forum</a> > <b>{{breadcrumb}}</b>
-        {{/if}}
-        <div class="table-responsive">
-          <table class="table">
-            <thead>
-              <tr>
-                <th><!--icon--></th>
-                <th>Category</th>
-                <th>No. of Sub Categories</th>
-              </tr>
-              <div class="add-topic">
-                {{#if button}}
-                  <a class="btn btn-primary" href="/add-topic" role="button">Add {{button}}</a>
-                {{/if}}
-              </div>
-            </thead>
-            <tbody>
-              {{#each topic-thread}}
-              <tr>
-                <td>{{icon}}</td>
-                <td><a id="topicID" href="/thread?={{id}}">{{categoryName}}</a></td>
-                <td>{{count}}</td>
-              </tr>
-              {{/each}}
-            </tbody>
-          </table>
-        </div><!--table-responsive-->
+        <div class="panel-body">
+          <div class="table-responsive">
+           <div class="add-topic">
+              {{#if button}}
+               <a class="btn btn-primary btn-circle" id="add-btn" href="/addTopic" role="button"><b>+</b></a>
+              {{/if}}
+            </div><!--add-topic-->
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Thread</th>
+                  <th>User</th>
+                  <th>No. of Threads</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each topic-thread}}
+                <tr>
+                  <td><a id="topicID" href="/thread?={{id}}">{{categoryName}}</a></td>
+                  <td>{{user}}</td>
+                  <td>{{count}}</td>
+                </tr>
+                {{/each}}
+              </tbody>
+            </table>
+          </div><!--table-responsive-->
+        </div><!--panel-body-->
       </div><!--col-md-8-->
       
-      <!--recently viewed list-->
-      <div class="col-md-4">
-        <div class="table-responsive">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Recently Viewed</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Sample 1</td>
-              <tr>
-              <tr>
-                <td>Sample 2</td>
-              </tr>
-            </tbody>
-          </table>
-        </div><!--table-responsive-->
-        
-      </div>
+      {{> recentlyViewed}}
 
-    </div>
-  </div>
+    </div><!--row-->
+  </div><!--container-->
 
 
   <footer>Team M, COGS 121 Spring 2016</footer>

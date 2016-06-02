@@ -1,44 +1,48 @@
 <!DOCTYPE html>
 <html>
 {{> metadata}}
-
+<link rel="stylesheet" href="/css/forum.css">
 <body>
     {{> facebook}} {{> navbar}}
 
   <div class="container pushFooter">
-    <h2>{{topicTitle}}</h2>
     <div class="row">
-
+      <div class="forum-header">
+        <h2>{{topicTitle}}</h2>
+        {{#if breadcrumb}}
+            <a href="/forum">Forum</a> > <b>{{breadcrumb}}</b>
+        {{/if}}
+      </div><!--forum-header-->
       <!--category table-->
       <div class="col-md-8">
-        {{#if breadcrumb}}
-          <a href="/forum">Forum</a> > <b>{{breadcrumb}}</b>
-        {{/if}}
-        <div class="table-responsive">
-          <table class="table">
-            <thead>
-              <tr>
-                <th><!--icon--></th>
-                <th>Category</th>
-                <th>No. of Sub Categories</th>
-              </tr>
-              <div class="add-topic">
-                {{#if button}}
-                  <a class="btn btn-primary" href="/add-topic" role="button">Add {{button}}</a>
-                {{/if}}
-              </div>
-            </thead>
-            <tbody>
-              {{#each topic}}
-              <tr>
-                <td>{{icon}}</td>
-                <td><a id="topicID" href="/topicfeed?={{id}}">{{categoryName}}</a></td>
-                <td>{{count}}</td>
-              </tr>
-              {{/each}}
-            </tbody>
-          </table>
-        </div><!--table-responsive-->
+        <div class="panel-body">
+          <div class="table-responsive">
+            <div class="add-topic">
+              {{#if button}}
+               <a class="btn btn-primary btn-circle" id="add-btn" href="/addTopic" role="button"><b>+</b></a>
+              {{/if}}
+            </div><!--add-topic-->
+            <br>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Topic</th>
+                  <th>User</th>
+                  <th>No. of Threads</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each topic}}
+                <tr>
+                  <td><a id="topicID" href="/topicfeed?={{id}}">{{categoryName}}</a></td>
+                  <td>{{user}}</td>
+                  <td>{{count}}</td>
+                </tr>
+                {{/each}}
+              </tbody>
+            </table>
+          </div><!--table-responsive-->
+        </div><!--panel-body-->
       </div><!--col-md-8-->
 
       

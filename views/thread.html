@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html>
 {{> metadata}}
-
+<link rel="stylesheet" href="/css/forum.css">
 <body>
     {{> facebook}} {{> navbar}}
-
+  <br><br>
   <div class="container pushFooter">
-    <h2>Forum Topic</h2>
     <div class="row">
 
       <!--category table-->
       <div class="col-md-8">
+        <div class="panel-body">
+        <a href="/topicfeed">back</a>
         <hr>
         <div class="thread-body">
           <h3>{{threadTitle}}</h3>
-          {{posted}}
-          {{user}}
-          <p>{{threadContent}}</p>
+          <div class="thread-byline"><h6>{{user}}, {{posted}}</h6></div>
+          <br>
+          <div class="thread-content">{{threadContent}}</div>
           <br>
         </div><!--thread-body-->
         <div class="thread-comments">
@@ -26,6 +27,7 @@
             <button id="submit-btn" type="submit" class="btn btn-primary">Submit</button>
           </form>
           <br> -->
+          <h5>Comments (3)</h5>
           <hr>
           {{#each comments}}
             {{user}}
@@ -34,12 +36,14 @@
             <hr>
           {{/each}}
         </div><!--thread-comments-->
-        <h5>Comments</h5>
         <form>
-          <textarea class="form-control" id="thread-add-comment" rows="3" placeholder="Enter your comment here!"></textarea>
+          <textarea class="form-control" id="thread-add-comment" rows="3" placeholder="Leave a comment here!"></textarea>
+          <br>
           <button id="submit-btn" type="submit" class="btn btn-primary">Submit</button>
         </form>
         <br/><br/>
+        </div><!--panel-body-->
+        <br><br>
       </div><!--col-md-8-->
       
       {{> recentlyViewed}}
