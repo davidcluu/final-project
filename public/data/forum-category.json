@@ -1,0 +1,22 @@
+{
+	"category": [
+		{
+			"icon": "Icon 1",
+			"categoryName": "Election",
+			"count": 52,
+			"url": "election"
+		},
+		{
+			"icon": "Icon 2",
+			"categoryName": "Party Talk",
+			"count": 6,
+			"url": "partytalk"
+		},
+		{
+			"icon": "Icon 3",
+			"categoryName": "Neighborhood Talk",
+			"count": 5,
+			"url": "neighbortalk"
+		}
+	]
+}

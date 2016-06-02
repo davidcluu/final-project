@@ -25,7 +25,7 @@
 <body>
     {{> facebook}} {{> navbar}}
 
-  <div class="container pushFooter">
+  <div class="container">
     <h2>Forum {{topicTitle}}</h2>
     <div class="row">
 
@@ -42,12 +42,17 @@
                 <th>Category</th>
                 <th>No. of Sub Categories</th>
               </tr>
+              <div class="add-topic">
+                {{#if button}}
+                  <a class="btn btn-primary" href="/add-topic" role="button">Add {{button}}</a>
+                {{/if}}
+              </div>
             </thead>
             <tbody>
-              {{#each category}}
+              {{#each topic}}
               <tr>
                 <td>{{icon}}</td>
-                <td><a id="topicID" href="/topic?cat={{url}}">{{categoryName}}</a></td>
+                <td><a id="topicID" href="/thread?={{id}}">{{categoryName}}</a></td>
                 <td>{{count}}</td>
               </tr>
               {{/each}}
@@ -55,7 +60,7 @@
           </table>
         </div><!--table-responsive-->
       </div><!--col-md-8-->
-
+      
       <!--recently viewed list-->
       <div class="col-md-4">
         <div class="table-responsive">
@@ -75,19 +80,16 @@
             </tbody>
           </table>
         </div><!--table-responsive-->
-
+        
       </div>
 
->>>>>>> 572a8c6ea5fcde77ea4f0ef63ee2fe92899153ff
     </div>
   </div>
 
 
-<<<<<<< HEAD
-        <footer>Team M, COGS 121 Spring 2016</footer>
-=======
   <footer>Team M, COGS 121 Spring 2016</footer>
->>>>>>> 572a8c6ea5fcde77ea4f0ef63ee2fe92899153ff
 </body>
 
 </html>
+
+
