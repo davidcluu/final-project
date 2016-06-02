@@ -42,12 +42,17 @@
                 <th>Category</th>
                 <th>No. of Sub Categories</th>
               </tr>
+              <div class="add-topic">
+                {{#if button}}
+                  <a class="btn btn-primary" href="/add-topic" role="button">Add {{button}}</a>
+                {{/if}}
+              </div>
             </thead>
             <tbody>
-              {{#each category}}
+              {{#each topic}}
               <tr>
                 <td>{{icon}}</td>
-                <td><a id="topicID" href="/topic?cat={{url}}">{{categoryName}}</a></td>
+                <td><a id="topicID" href="/thread?={{id}}">{{categoryName}}</a></td>
                 <td>{{count}}</td>
               </tr>
               {{/each}}

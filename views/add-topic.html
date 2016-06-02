@@ -26,34 +26,18 @@
     {{> facebook}} {{> navbar}}
 
   <div class="container">
-    <h2>Forum {{topicTitle}}</h2>
+    <h2>Forum Add Topic</h2>
     <div class="row">
 
       <!--category table-->
       <div class="col-md-8">
-        {{#if breadcrumb}}
-          <a href="/forum">forum</a> > <b>{{breadcrumb}}</b>
-        {{/if}}
-        <div class="table-responsive">
-          <table class="table">
-            <thead>
-              <tr>
-                <th><!--icon--></th>
-                <th>Category</th>
-                <th>No. of Sub Categories</th>
-              </tr>
-            </thead>
-            <tbody>
-              {{#each category}}
-              <tr>
-                <td>{{icon}}</td>
-                <td><a id="topicID" href="/topic?cat={{url}}">{{categoryName}}</a></td>
-                <td>{{count}}</td>
-              </tr>
-              {{/each}}
-            </tbody>
-          </table>
-        </div><!--table-responsive-->
+        <form>
+          <fieldset class="form-group">
+            <input type="text" class="form-control" id="topic-title" placeholder="Enter title here!"></input> 
+            <textarea class="form-control" id="topic-content" rows="10" placeholder="Enter content here!"></textarea>
+          </fieldset>
+          <button id="submit-btn" type="submit" class="btn btn-primary">Submit</button>
+        </form>
       </div><!--col-md-8-->
       
       <!--recently viewed list-->

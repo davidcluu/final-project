@@ -26,34 +26,34 @@
     {{> facebook}} {{> navbar}}
 
   <div class="container">
-    <h2>Forum {{topicTitle}}</h2>
+    <h2>Forum Add Topic</h2>
     <div class="row">
 
       <!--category table-->
       <div class="col-md-8">
-        {{#if breadcrumb}}
-          <a href="/forum">forum</a> > <b>{{breadcrumb}}</b>
-        {{/if}}
-        <div class="table-responsive">
-          <table class="table">
-            <thead>
-              <tr>
-                <th><!--icon--></th>
-                <th>Category</th>
-                <th>No. of Sub Categories</th>
-              </tr>
-            </thead>
-            <tbody>
-              {{#each category}}
-              <tr>
-                <td>{{icon}}</td>
-                <td><a id="topicID" href="/topic?cat={{url}}">{{categoryName}}</a></td>
-                <td>{{count}}</td>
-              </tr>
-              {{/each}}
-            </tbody>
-          </table>
-        </div><!--table-responsive-->
+        <hr>
+        <div class="thread-body">
+          <h3>{{threadTitle}}</h3>
+          {{posted}}
+          {{user}}
+          <p>{{threadContent}}</p>
+          <br>
+        </div><!--thread-body-->
+        <div class="thread-comments">
+          <h5>comments</h5>
+          <form>
+            <textarea class="form-control" id="thread-add-comment" rows="3" placeholder="Enter your comment here!"></textarea>
+            <button id="submit-btn" type="submit" class="btn btn-primary">Submit</button>
+          </form>
+          <br>
+          <hr>
+          {{#each comments}}
+            {{user}}
+            {{posted}}
+            <p>{{comment}}</p>
+            <hr>
+          {{/each}}
+        </div><!--thread-comments-->
       </div><!--col-md-8-->
       
       <!--recently viewed list-->
