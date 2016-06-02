@@ -1,29 +1,25 @@
 .btn-primary {
-	color: black;
-	background-color: #fff;
-	border-color: #000;
-	border-radius: 0;
-
-}
+  color: black;
+  background-color: #fff;
+  border-color: #000;
+  border-radius: 0; }
 
 .btn-primary:hover {
-	color: black;
-	background-color: #F5F5F5;
-	border-color: #000;
-
-}
+  color: black;
+  background-color: #F5F5F5;
+  border-color: #000; }
 
 .add-topic {
-	float: right;
-}
+  float: right; }
 
 /* Add */
 #topic-title, #topic-content, #thread-add-comment {
-	background-color: #F2F2F2;
-	border-style: solid;
-	border-color: #fff;
-	border-width: 0px 0px 1px 0px;
-}
+  background-color: #F2F2F2;
+  border-style: solid;
+  border-color: #fff;
+  border-width: 0px 0px 1px 0px; }
+
 #submit-btn {
-	float: right;
-}
+  float: right; }
+
+/*# sourceMappingURL=forum.css.map */

@@ -74,7 +74,7 @@ input[type="text"], textarea {
 .panel-body {
   background-color: white;
   border: 1px solid #F2F2F2; }
-  .panel-body h4 {
+  .panel-body h5 {
     color: #FD504A;
     font-family: "Muli", Helvetica, sans-serif;
     font-weight: 700; }

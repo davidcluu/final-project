@@ -1,38 +1,18 @@
-<!-- <html><head>
-  <meta charset="utf-8">
-
-  <link rel="stylesheet" href="/css/index.css">
-</head>
-
-<body>
-  <div id="map" style=""></div>
-
-  <script src="/js/jquery.min.js"></script>
-
-  <script src="/js/d3.min.js"></script>
-  <script src="/js/queue.min.js"></script>
-  <script src="/js/topojson.min.js"></script>
-
-  <script src="/js/map.js"></script>
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html>
 {{> metadata}}
-<link rel="stylesheet" href="/css/forum.css">
 
 <body>
     {{> facebook}} {{> navbar}}
 
-  <div class="container">
-    <h2>Forum {{topicTitle}}</h2>
+  <div class="container pushFooter">
+    <h2>{{topicTitle}}</h2>
     <div class="row">
 
       <!--category table-->
       <div class="col-md-8">
         {{#if breadcrumb}}
-          <a href="/forum">forum</a> > <b>{{breadcrumb}}</b>
+          <a href="/forum">Forum</a> > <b>{{breadcrumb}}</b>
         {{/if}}
         <div class="table-responsive">
           <table class="table">
@@ -60,7 +40,7 @@
           </table>
         </div><!--table-responsive-->
       </div><!--col-md-8-->
-      
+
       <!--recently viewed list-->
       <div class="col-md-4">
         <div class="table-responsive">
@@ -80,7 +60,7 @@
             </tbody>
           </table>
         </div><!--table-responsive-->
-        
+
       </div>
 
     </div>
@@ -91,5 +71,3 @@
 </body>
 
 </html>
-
-
