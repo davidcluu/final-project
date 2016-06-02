@@ -34,29 +34,7 @@
 
       <!--category table-->
       <div class="col-md-8">
-        <hr>
-        <div class="thread-body">
-          <h3>{{threadTitle}}</h3>
-          {{posted}}
-          {{user}}
-          <p>{{threadContent}}</p>
-          <br>
-        </div><!--thread-body-->
-        <div class="thread-comments">
-          <h5>comments</h5>
-          <form>
-            <textarea class="form-control" id="thread-add-comment" rows="3" placeholder="Enter your comment here!"></textarea>
-            <button id="submit-btn" type="submit" class="btn btn-primary">Submit</button>
-          </form>
-          <br>
-          <hr>
-          {{#each comments}}
-            {{user}}
-            {{posted}}
-            <p>{{comment}}</p>
-            <hr>
-          {{/each}}
-        </div><!--thread-comments-->
+        <a href="/topic">Rendered!</a>
       </div><!--col-md-8-->
       
       {{> recentlyViewed}}
