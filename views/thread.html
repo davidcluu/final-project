@@ -1,35 +1,12 @@
-<!-- <html><head>
-  <meta charset="utf-8">
-
-  <link rel="stylesheet" href="/css/index.css">
-</head>
-
-<body>
-  <div id="map" style=""></div>
-
-  <script src="/js/jquery.min.js"></script>
-
-  <script src="/js/d3.min.js"></script>
-  <script src="/js/queue.min.js"></script>
-  <script src="/js/topojson.min.js"></script>
-
-  <script src="/js/map.js"></script>
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html>
 {{> metadata}}
-<link rel="stylesheet" href="/css/forum.css">
 
 <body>
     {{> facebook}} {{> navbar}}
 
-  <div class="container">
-    <h2>Forum</h2>
-    <div class="thread-back">
-      <a href="/topicfeed?cat={{topic}}">back</a>
-    </div>
+  <div class="container pushFooter">
+    <h2>Forum Topic</h2>
     <div class="row">
 
       <!--category table-->
@@ -43,12 +20,12 @@
           <br>
         </div><!--thread-body-->
         <div class="thread-comments">
-          <h5>comments</h5>
+          <!-- <h5>Comments</h5>
           <form>
             <textarea class="form-control" id="thread-add-comment" rows="3" placeholder="Enter your comment here!"></textarea>
             <button id="submit-btn" type="submit" class="btn btn-primary">Submit</button>
           </form>
-          <br>
+          <br> -->
           <hr>
           {{#each comments}}
             {{user}}
@@ -57,6 +34,12 @@
             <hr>
           {{/each}}
         </div><!--thread-comments-->
+        <h5>Comments</h5>
+        <form>
+          <textarea class="form-control" id="thread-add-comment" rows="3" placeholder="Enter your comment here!"></textarea>
+          <button id="submit-btn" type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <br/><br/>
       </div><!--col-md-8-->
       
       {{> recentlyViewed}}
@@ -64,9 +47,8 @@
   </div><!--thread-->
 
 
+
   <footer>Team M, COGS 121 Spring 2016</footer>
 </body>
 
 </html>
-
-

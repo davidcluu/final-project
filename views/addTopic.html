@@ -1,31 +1,11 @@
-<!-- <html><head>
-  <meta charset="utf-8">
-
-  <link rel="stylesheet" href="/css/index.css">
-</head>
-
-<body>
-  <div id="map" style=""></div>
-
-  <script src="/js/jquery.min.js"></script>
-
-  <script src="/js/d3.min.js"></script>
-  <script src="/js/queue.min.js"></script>
-  <script src="/js/topojson.min.js"></script>
-
-  <script src="/js/map.js"></script>
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html>
 {{> metadata}}
-<link rel="stylesheet" href="/css/forum.css">
 
 <body>
     {{> facebook}} {{> navbar}}
 
-  <div class="container">
+  <div class="container pushFooter">
     <h2>Add Topic</h2>
     <div class="row">
 
@@ -33,7 +13,7 @@
       <div class="col-md-8">
         <form>
           <fieldset class="form-group">
-            <input type="text" class="form-control" id="topic-title" placeholder="Enter title here!"></input> 
+            <input type="text" class="form-control" id="topic-title" placeholder="Enter title here!"></input>
             <textarea class="form-control" id="topic-content" rows="10" placeholder="Enter content here!"></textarea>
           </fieldset>
           <button id="submit-btn" type="submit" class="btn btn-primary">Submit</button>
@@ -41,6 +21,7 @@
       </div><!--col-md-8-->
       
       {{> recentlyViewed}}
+
 
     </div><!--row-->
   </div><!--contianer-->
@@ -50,5 +31,3 @@
 </body>
 
 </html>
-
-
