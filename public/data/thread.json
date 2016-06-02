@@ -7,17 +7,17 @@
 		{
 			"user": "user 1",
 			"posted": "Nov 1",
-			"comment": "haha so funny"
+			"comment": "wow this is insightful"
 		},
 		{
 			"user": "user 2",
 			"posted": "Nov 12",
-			"comment": "haha so funny2"
+			"comment": "i disagree"
 		},
 		{
 			"user": "user 3",
 			"posted": "Nov 123",
-			"comment": "haha so funny23"
+			"comment": "oh whaddup"
 		}
 	]
 }
