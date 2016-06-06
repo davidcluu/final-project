@@ -3,36 +3,42 @@
 		{
 			"icon": "/img/forum-dots/election.png",
 			"categoryName": "Election",
+			"categoryDescription": "Discuss and debate about the current election cycle.",
 			"count": 52,
 			"url": "election"
 		},
 		{
 			"icon": "/img/forum-dots/election.png",
 			"categoryName": "Party Talk",
+			"categoryDescription": "Discuss the current on-goings in your political party.",
 			"count": 6,
 			"url": "partytalk"
 		},
 		{
 			"icon": "/img/forum-dots/election.png",
 			"categoryName": "Neighborhood Talk",
+			"categoryDescription": "Discuss the current on-goings within your San Diego neighborhood.",
 			"count": 5,
 			"url": "neighbortalk"
 		},
 		{
 			"icon": "/img/forum-dots/election.png",
 			"categoryName": "Polling",
+			"categoryDescription": "Ask questions, get the numbers, and get updates as results come in!",
 			"count": 4,
 			"url": "neighbortalk"
 		},
 		{
 			"icon": "/img/forum-dots/election.png",
 			"categoryName": "Election Candidates",
+			"categoryDescription": "Discuss and debate the pros and cons of each candidate.",
 			"count": 2,
 			"url": "neighbortalk"
 		},
 		{
 			"icon": "/img/forum-dots/election.png",
 			"categoryName": "Headlines",
+			"categoryDescription": "What's going on in the political world, locally and nationally?",
 			"count": 9,
 			"url": "neighbortalk"
 		}

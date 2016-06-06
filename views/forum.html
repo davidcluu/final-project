@@ -7,15 +7,15 @@
 
     <div class="container pushFooter">
         <div class="forum-header">
-          <h2>Forum</h2>
+          <h2>Discussion Forum</h2>
         </div>
         <div class="row">
 
             <!--category table-->
-            <div class="col-md-8">
-                <div class="panel-body">
+            <div class="col-md-8 no-padding">
+                <div class="panel-body forum-margin-btm">
                     {{#if breadcrumb}}
-                    <a href="/forum">Forum</a> > <b>{{breadcrumb}}</b> 
+                    <a href="/forum">Forum</a> > <b>{{breadcrumb}}</b>
                     {{/if}}
                     <div class="table-responsive forum-table">
                         <table class="table">
@@ -31,8 +31,11 @@
                             <tbody>
                                 {{#each category}}
                                 <tr>
-                                    <td><img src="{{icon}}"></td>
-                                    <td><a id="topicID" href="/topic?cat={{url}}">{{categoryName}}</a></td>
+                                    <td><img src="{{icon}}" width="10px" height="auto"></td>
+                                    <td>
+                                       <a id="topicID" href="/topic?cat={{url}}">{{categoryName}}</a>
+                                    <p>{{categoryDescription}}</p>
+                                 </td>
                                     <td>{{count}}</td>
                                 </tr>
                                 {{/each}}

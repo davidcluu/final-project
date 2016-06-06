@@ -16,8 +16,13 @@ path {
 /* styling for the results */
 
 @media (min-width: 1024px) {
-   .results, .map{
-      width: 50%;
+   .results {
+      width: 52%;
+      height: calc(100% - 50px); /* minus height of nav bar */
+      overflow: auto;
+   }
+   .map{
+      width: 48%;
       height: calc(100% - 50px); /* minus height of nav bar */
       overflow: auto;
    }
@@ -89,7 +94,7 @@ box-shadow:none !important;
 
 .panel-body {
    background-color: white;
-   border: 1px solid $grey;
+   border: 1px solid #e4e4e4;
    h5 {
       color: $red-orange;
       font-family: $body-font;

@@ -1,22 +1,3 @@
-<!-- <html><head>
-  <meta charset="utf-8">
-
-  <link rel="stylesheet" href="/css/index.css">
-</head>
-
-<body>
-  <div id="map" style=""></div>
-
-  <script src="/js/jquery.min.js"></script>
-
-  <script src="/js/d3.min.js"></script>
-  <script src="/js/queue.min.js"></script>
-  <script src="/js/topojson.min.js"></script>
-
-  <script src="/js/map.js"></script>
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html>
 {{> metadata}}
@@ -25,55 +6,60 @@
 <body>
     {{> facebook}} {{> navbar}}
 
-  <div class="container">
-    <div class="forum-header">
-      <h2>{{topicTitle}}</h2>
-      {{#if breadcrumb}}
-        <a href="/forum">Forum</a> > <b>{{breadcrumb}}</b> 
-      {{/if}}
+    <div class="container pushFooter">
+        <div class="forum-header">
+            {{#if breadcrumb}}
+            <span class="breadcrumb"><a href="/forum">Forum</a>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;{{breadcrumb}}</span> {{/if}}
+            <h2>{{topicTitle}}</h2>
+        </div>
+        <div class="row">
+
+            <!--category table-->
+            <div class="col-md-8 no-padding">
+                <div class="panel-body forum-margin-btm">
+                    <div class="table-responsive">
+                        <div class="add-topic">
+                            {{#if button}}
+                            <a id="add-btn" href="/addTopic" role="button">
+                                <button type="button" name="button">New Thread</button>
+                            </a>
+                            {{/if}}
+                        </div>
+                        <!--add-topic-->
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Thread</th>
+                                    <th>User</th>
+                                    <th>No. of Threads</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each topic-thread}}
+                                <tr>
+                                    <td><a id="topicID" href="/thread?={{id}}">{{categoryName}}</a></td>
+                                    <td>{{user}}</td>
+                                    <td>{{count}}</td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--table-responsive-->
+                </div>
+                <!--panel-body-->
+            </div>
+            <!--col-md-8-->
+
+            {{> recentlyViewed}}
+
+        </div>
+        <!--row-->
     </div>
-    <div class="row">
-
-      <!--category table-->
-      <div class="col-md-8">
-        <div class="panel-body">
-          <div class="table-responsive">
-           <div class="add-topic">
-              {{#if button}}
-               <a class="btn btn-primary btn-circle" id="add-btn" href="/addTopic" role="button"><b>+</b></a>
-              {{/if}}
-            </div><!--add-topic-->
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>Thread</th>
-                  <th>User</th>
-                  <th>No. of Threads</th>
-                </tr>
-              </thead>
-              <tbody>
-                {{#each topic-thread}}
-                <tr>
-                  <td><a id="topicID" href="/thread?={{id}}">{{categoryName}}</a></td>
-                  <td>{{user}}</td>
-                  <td>{{count}}</td>
-                </tr>
-                {{/each}}
-              </tbody>
-            </table>
-          </div><!--table-responsive-->
-        </div><!--panel-body-->
-      </div><!--col-md-8-->
-      
-      {{> recentlyViewed}}
-
-    </div><!--row-->
-  </div><!--container-->
+    <!--container-->
 
 
-  <footer>Team M, COGS 121 Spring 2016</footer>
+    <footer>Team M, COGS 121 Spring 2016</footer>
 </body>
 
 </html>
-
-

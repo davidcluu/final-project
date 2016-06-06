@@ -1,65 +1,56 @@
-body {
-  background-color: #F2F2F2;
-}
+.forum-header {
+  padding-top: 30px; }
 
-.btn-circle {
-  width: 30px;
-  height: 30px;
-  text-align: center;
-  padding: 6px 0;
-  font-size: 12px;
-  line-height: 1.428571429;
-  border-radius: 15px;
-  border-width: 1.5px;
-}
+.breadcrumb {
+  font-weight: 700;
+  font-size: 0.9em; }
+
+.forum-margin-btm {
+  margin-bottom: 30px; }
+
+.no-padding {
+  padding-left: 0;
+  padding-right: 0; }
+
+#submit-btn {
+  padding: 7px 17px;
+  background-color: #64D4FF;
+  border-radius: 3px;
+  border: none;
+  color: white;
+  -webkit-transition: all 0.3s ease-in-out;
+  /* Safari */
+  transition: all 0.3s ease-in-out; }
+
+#submit-btn:hover {
+  background-color: #1399CC; }
 
 #add-btn {
-  color: #4D4D4D;
-}
-
-.btn-primary {
-  color: black;
-  background-color: #fff;
-  border-color: #C2C2C2;
-}
-
-#add-btn:hover {
-  color: #fff;
-  background-color: #D9D9D9;
-  border-color: #D9D9D9; 
-}
-
-
-.add-topic {
   float: right; }
 
-.forum-background {
-  background-color: white;
-  border: 1px solid #F2F2F2;
-}
-
-.forum-header{
-  padding-left: 20px;
-  padding-bottom: 20px;
-}
-
-.forum-table td {
-  padding: 100px;
-}
 /* Add */
 #topic-title, #topic-content, #thread-add-comment {
   background-color: #fff;
   border-style: solid;
-  border-color: #F2F2F2;
+  border-color: #fff;
   border-width: 0px 0px 1px 0px; }
 
 #submit-btn {
   float: right; }
 
+a button {
+  padding: 7px 17px;
+  background-color: #64D4FF;
+  border-radius: 3px;
+  border: none;
+  color: white;
+  -webkit-transition: all 0.3s ease-in-out;
+  /* Safari */
+  transition: all 0.3s ease-in-out; }
+a button:hover {
+  background-color: #1399CC; }
+
+textarea {
+  resize: none; }
+
 /*# sourceMappingURL=forum.css.map */
-
-/*thread*/
-
-.thread-byline {
-
-}

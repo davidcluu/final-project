@@ -8,18 +8,18 @@
   <div class="container pushFooter">
     <div class="row">
       <div class="forum-header">
+         {{#if breadcrumb}}
+             <span class="breadcrumb"><a href="/forum">Forum</a>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;{{breadcrumb}}</span>
+         {{/if}}
         <h2>{{topicTitle}}</h2>
-        {{#if breadcrumb}}
-            <a href="/forum">Forum</a> > <b>{{breadcrumb}}</b>
-        {{/if}}
       </div><!--forum-header-->
       <!--category table-->
-      <div class="col-md-8">
-        <div class="panel-body">
+      <div class="col-md-8 no-padding">
+        <div class="panel-body forum-margin-btm">
           <div class="table-responsive">
             <div class="add-topic">
               {{#if button}}
-               <a class="btn btn-primary btn-circle" id="add-btn" href="/addTopic" role="button"><b>+</b></a>
+               <a id="add-btn" href="/addTopic" role="button"><button>New Topic</button></a>
               {{/if}}
             </div><!--add-topic-->
             <br>
@@ -45,7 +45,7 @@
         </div><!--panel-body-->
       </div><!--col-md-8-->
 
-      
+
       {{> recentlyViewed}}
 
 

@@ -3,7 +3,7 @@
 {{> metadata}}
 
 <body>
-    <!--{{> facebook}}-->{{> navbar}}
+    <!--{{> facebook}}-->{{> navbar active}}
     <!-- <div class="map map-container">
         <div id="map" style=""></div>
     </div> -->
@@ -21,27 +21,32 @@
         </div>
         <div id="results-content">
             <h2><span id="rep-cd"></span> Congressional District</h2>
-            <!-- <div class="panel">
+            <div class="panel">
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-4 col-lg-4">
-                            <h5>Population</h5>
+                            <h5>Represented By</h5>
+                            <p>
+                                <span id="rep-firstname"></span> <span id="rep-lastname"></span>
+                            </p>
+                        </div>
+                        <div class="col-md-4 col-lg-4">
+                            <h5>Political Party</h5>
+                            <p>
+                                <span id="rep-party"></span>
+                            </p>
+                        </div>
+                        <div class="col-md-4 col-lg-4">
+                            <h5>District Population</h5>
                             <p>
                                 123,456
                             </p>
                         </div>
-                        <div class="col-md-8 col-lg-8">
-                            <h5>Representative</h5>
-                            <p>
-                                Firstname Lastname
-                            </p>
-                        </div>
                     </div>
-                    District Information (e.g. number, population)
                 </div>
-            </div> -->
+            </div>
 
-            <div class="panel">
+            <!-- <div class="panel">
                 <div class="panel-body">
                     <h5 id="rep-name">Rep. <span id="rep-firstname"></span> <span id="rep-lastname"></span></h5>
                     <div class="row">
@@ -59,7 +64,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <div class="panel">
                 <div class="panel-body">
@@ -99,7 +104,7 @@
                 </div>
             </div>
         </div>
-        <footer>Team M, COGS 121 Spring 2016</footer>
+        <!-- <footer>Team M, COGS 121 Spring 2016</footer> -->
     </div>
     <!--end right side-->
     <div class="map map-container">

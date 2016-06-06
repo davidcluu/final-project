@@ -1,29 +1,64 @@
-.btn-primary {
-	color: black;
-	background-color: #fff;
-	border-color: #000;
-	border-radius: 0;
+@import 'variables';
 
+.forum-header {
+	padding-top: 30px;
+}
+.breadcrumb {
+	font-weight: 700;
+	font-size: 0.9em;
 }
 
-.btn-primary:hover {
-	color: black;
-	background-color: #F5F5F5;
-	border-color: #000;
-
+.forum-margin-btm {
+	margin-bottom: 30px;
 }
 
-.add-topic {
+.no-padding {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+#submit-btn {
+	padding: 7px 17px;
+	background-color: $bright-blue;
+	border-radius: 3px;
+	border: none;
+	color: white;
+	@include link-transition;
+}
+
+#submit-btn:hover {
+	background-color: $dark-blue;
+}
+
+#add-btn {
 	float: right;
 }
 
 /* Add */
 #topic-title, #topic-content, #thread-add-comment {
-	background-color: #F2F2F2;
+	background-color: #fff;
 	border-style: solid;
 	border-color: #fff;
 	border-width: 0px 0px 1px 0px;
 }
 #submit-btn {
 	float: right;
+}
+
+a {
+	button {
+		padding: 7px 17px;
+		background-color: $bright-blue;
+		border-radius: 3px;
+		border: none;
+		color: white;
+		@include link-transition;
+	}
+	button:hover {
+		background-color: $dark-blue;
+	}
+}
+
+textarea {
+    resize: none;
 }

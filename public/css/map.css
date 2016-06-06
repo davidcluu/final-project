@@ -11,8 +11,14 @@ path {
 
 /* styling for the results */
 @media (min-width: 1024px) {
-  .results, .map {
-    width: 50%;
+  .results {
+    width: 52%;
+    height: calc(100% - 50px);
+    /* minus height of nav bar */
+    overflow: auto; }
+
+  .map {
+    width: 48%;
     height: calc(100% - 50px);
     /* minus height of nav bar */
     overflow: auto; } }
@@ -60,7 +66,7 @@ input[type="text"], textarea {
   border-bottom: 1px solid #F2F2F2;
   position: fixed;
   box-shadow: 1px 1px 3px rgba(153, 153, 153, 0.9);
-  width: 50%;
+  width: 52%;
   /* only if container on left cause it spans the whole width */ }
 
 /* panels */
@@ -73,7 +79,7 @@ input[type="text"], textarea {
 
 .panel-body {
   background-color: white;
-  border: 1px solid #F2F2F2; }
+  border: 1px solid #e4e4e4; }
   .panel-body h5 {
     color: #FD504A;
     font-family: "Muli", Helvetica, sans-serif;
