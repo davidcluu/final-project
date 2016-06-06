@@ -143,8 +143,9 @@ function drawDonut(id, title, data, color, speed) {
                   .on('mouseover', d => $('#' + id + ' .title').text(d.data.label) )
                   .on('mouseout', d => $('#' + id + ' .title').text(title) )
                 .transition()
-                .duration(speed)
-                .attrTween('d', tweenDonut);
+                  .duration(speed)
+                  .attrTween('d', tweenDonut)
+                  .each('end', function() {console.log('done')} );
 
   function tweenDonut(finish) {
     var start = {
