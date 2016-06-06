@@ -394,9 +394,17 @@ function handleCrime() {
   if (currentDistrict == -1)
     return;
 
-  $('#chart1').empty()
-  $('#chart2').empty()
-  $('#chart3').empty()
+  queue()
+    .defer(d3.json, '/delphiData/getCrime?district=' + currentDistrict)
+    .await(chartReady);
 
-  console.log('crime');
+  function chartReady(err, data1) {
+    if (err) console.error(err);
+
+    $('#chart1').empty()
+    $('#chart2').empty()
+    $('#chart3').empty()
+   
+    drawDonut('chart1', 'Crime', data1, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data1.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
+  }
 }
