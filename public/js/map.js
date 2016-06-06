@@ -343,9 +343,26 @@ function handlePolitics() {
   if (currentDistrict == -1)
     return;
 
-  $('#chart1').empty()
-  $('#chart2').empty()
-  $('#chart3').empty()
+  queue()
+    .defer(d3.json, '/data/affiliations.json')
+    .await(chartReady);
+
+  function chartReady(err, data1) {
+    if (err) console.error(err);
+
+    $('#chart1').empty()
+    $('#chart2').empty()
+    $('#chart3').empty()
+
+    var data1_cd = data1[currentDistrict]
+    var data1Normalized = []
+    $.each(data1_cd, function(d) {
+      data1Normalized.push({label: d, count: data1_cd[d] * 1000});
+    });
+
+   
+    drawDonut('chart1', 'Preference', data1Normalized, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data1Normalized.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
+  }
 }
 
 function handleHealth() {
