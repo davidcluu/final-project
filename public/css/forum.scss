@@ -12,12 +12,16 @@
 	margin-bottom: 30px;
 }
 
+.forum-panel-btm {
+	margin-bottom: 10px;
+}
+
 .no-padding {
 	padding-left: 0;
 	padding-right: 0;
 }
 
-#submit-btn {
+#submit-btn, #new-topic {
 	padding: 7px 17px;
 	background-color: $bright-blue;
 	border-radius: 3px;
@@ -26,23 +30,33 @@
 	@include link-transition;
 }
 
-#submit-btn:hover {
+#submit-btn:hover, #new-topic:hover {
 	background-color: $dark-blue;
 }
 
-#add-btn {
+#add-btn, #new-topic {
 	float: right;
 }
 
 /* Add */
 #topic-title, #topic-content, #thread-add-comment {
 	background-color: #fff;
-	border-style: solid;
-	border-color: #fff;
-	border-width: 0px 0px 1px 0px;
+	border: 1px solid $darker-grey;
 }
+
+.thread-byline
+h6 {
+	font-family: $body-font;
+	font-weight: 700;
+	color: transparentize(#000, 0.5);;
+}
+
 #submit-btn {
 	float: right;
+}
+
+.form-control {
+	margin-bottom: 10px;
 }
 
 a {
@@ -61,4 +75,72 @@ a {
 
 textarea {
     resize: none;
+}
+
+/* modal */
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+	 -webkit-animation-name: fadeIn; /* Fade in the background */
+	 -webkit-animation-duration: 0.4s;
+	 animation-name: fadeIn;
+	 animation-duration: 0.4s
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 13% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    //width: 80%; /* Could be more or less, depending on screen size */
+	 -webkit-animation-name: slideIn;
+    -webkit-animation-duration: 0.4s;
+    animation-name: slideIn;
+    animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes slideIn {
+    from {top: -300px; opacity: 0}
+    to {top: 0; opacity: 1}
+}
+
+@keyframes slideIn {
+    from {top: -300px; opacity: 0}
+    to {top: 0; opacity: 1}
+}
+
+@-webkit-keyframes fadeIn {
+    from {opacity: 0}
+    to {opacity: 1}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0}
+    to {opacity: 1}
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }

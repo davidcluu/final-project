@@ -2,58 +2,86 @@
 <html>
 {{> metadata}}
 <link rel="stylesheet" href="/css/forum.css">
+
 <body>
     {{> facebook}} {{> navbar}}
 
-  <div class="container pushFooter">
-    <div class="row">
-      <div class="forum-header">
-         {{#if breadcrumb}}
-             <span class="breadcrumb"><a href="/forum">Forum</a>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;{{breadcrumb}}</span>
-         {{/if}}
-        <h2>{{topicTitle}}</h2>
-      </div><!--forum-header-->
-      <!--category table-->
-      <div class="col-md-8 no-padding">
-        <div class="panel-body forum-margin-btm">
-          <div class="table-responsive">
-            <div class="add-topic">
-              {{#if button}}
-               <a id="add-btn" href="/addTopic" role="button"><button>New Topic</button></a>
-              {{/if}}
-            </div><!--add-topic-->
-            <br>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>Topic</th>
-                  <th>User</th>
-                  <th>No. of Threads</th>
-                </tr>
-              </thead>
-              <tbody>
-                {{#each topic}}
-                <tr>
-                  <td><a id="topicID" href="/topicfeed?={{id}}">{{categoryName}}</a></td>
-                  <td>{{user}}</td>
-                  <td>{{count}}</td>
-                </tr>
-                {{/each}}
-              </tbody>
-            </table>
-          </div><!--table-responsive-->
-        </div><!--panel-body-->
-      </div><!--col-md-8-->
+    <div class="container pushFooter">
+        <div class="row">
+            <div class="forum-header">
+                {{#if breadcrumb}}
+                <span class="breadcrumb"><a href="/forum">Forum</a>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;{{breadcrumb}}</span> {{/if}}
+                <h2>{{topicTitle}}</h2>
+            </div>
+            <!--forum-header-->
+            <!--category table-->
+            <div class="col-md-8 no-padding">
+                <div class="panel-body forum-margin-btm">
+                    <div class="table-responsive">
+                        <div class="add-topic">
+                            {{#if button}}
+                            <!-- <a id="add-btn" href="/addTopic" role="button"> -->
+                            <button type="button" id="new-topic" data-toggle="modal" data-target="#myModal">New Topic</button>
+                            <!-- </a> -->
+                            {{/if}}
+                            <!-- The Modal -->
+                            <div id="myModal" class="modal ">
+                                <!-- Modal content -->
+                                <div class="modal-dialog modal-md">
+                                    <div class="modal-content">
+                                        <span class="close">x</span>
+                                        <h2>Create a New Topic</h2>
+                                        <form>
+                                            <fieldset class="form-group">
+                                                <input type="text" class="form-control" id="topic-title" placeholder="Write a descriptive title"></input>
+                                                <textarea class="form-control" id="topic-content" rows="10" placeholder="Elaborate and provide more details"></textarea>
+                                                <button id="submit-btn" type="submit">Submit</button>
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div> <!-- end modal -->
+                        </div>
+                        <!--add-topic-->
+                        <br>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Topic</th>
+                                    <th>User</th>
+                                    <th>No. of Threads</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each topic}}
+                                <tr>
+                                    <td><a id="topicID" href="/topicfeed?={{id}}">{{categoryName}}</a></td>
+                                    <td>{{user}}</td>
+                                    <td>{{count}}</td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--table-responsive-->
+                </div>
+                <!--panel-body-->
+            </div>
+            <!--col-md-8-->
 
 
-      {{> recentlyViewed}}
+            {{> recentlyViewed}}
 
 
-    </div><!--row-->
-  </div><!--container-->
+        </div>
+        <!--row-->
+    </div>
+    <!--container-->
 
 
-  <footer>Team M, COGS 121 Spring 2016</footer>
+    <footer>Team M, COGS 121 Spring 2016</footer>
+    <script src="/js/modal.js"></script>
+
 </body>
 
 </html>

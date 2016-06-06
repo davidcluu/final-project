@@ -13,17 +13,34 @@
             <h2>{{topicTitle}}</h2>
         </div>
         <div class="row">
-
             <!--category table-->
             <div class="col-md-8 no-padding">
                 <div class="panel-body forum-margin-btm">
                     <div class="table-responsive">
                         <div class="add-topic">
                             {{#if button}}
-                            <a id="add-btn" href="/addTopic" role="button">
-                                <button type="button" name="button">New Thread</button>
-                            </a>
+                            <!-- <a id="add-btn" href="/addTopic" role="button"> -->
+                            <button type="button" id="new-topic" data-toggle="modal" data-target="#myModal">New Thread</button>
+                            <!-- </a> -->
                             {{/if}}
+                            <!-- The Modal -->
+                            <div id="myModal" class="modal ">
+                                <!-- Modal content -->
+                                <div class="modal-dialog modal-md">
+                                    <div class="modal-content">
+                                        <span class="close">x</span>
+                                        <h2>Create a New Thread</h2>
+                                        <form>
+                                            <fieldset class="form-group">
+                                                <input type="text" class="form-control" id="topic-title" placeholder="Write a descriptive title"></input>
+                                                <textarea class="form-control" id="topic-content" rows="10" placeholder="Elaborate and provide more details"></textarea>
+                                                <button id="submit-btn" type="submit">Submit</button>
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end modal -->
                         </div>
                         <!--add-topic-->
                         <table class="table">
@@ -61,5 +78,6 @@
 
     <footer>Team M, COGS 121 Spring 2016</footer>
 </body>
+<script src="/js/modal.js"></script>
 
 </html>

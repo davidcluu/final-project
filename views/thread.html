@@ -6,27 +6,26 @@
     {{> facebook}} {{> navbar}}
   <br><br>
   <div class="container pushFooter">
+     <a href="/topicfeed">Back</a>
     <div class="row">
-
       <!--category table-->
-      <div class="col-md-8">
-        <div class="panel-body forum-margin-btm">
-        <a href="/topicfeed">back</a>
-        <hr>
+      <div class="col-md-8 no-padding">
+        <div class="panel-body forum-panel-btm">
         <div class="thread-body">
           <h3>{{threadTitle}}</h3>
-          <div class="thread-byline"><h6>{{user}}, {{posted}}</h6></div>
+          <div class="thread-byline"><h6>{{user}} &middot; {{posted}}</h6></div>
           <br>
           <div class="thread-content">{{threadContent}}</div>
           <br>
         </div><!--thread-body-->
+     </div>
+     <div class="panel-body forum-margin-btm">
         <div class="thread-comments">
-          <!-- <h5>Comments</h5>
           <form>
             <textarea class="form-control" id="thread-add-comment" rows="3" placeholder="Enter your comment here!"></textarea>
             <button id="submit-btn" type="submit" class="btn btn-primary">Submit</button>
           </form>
-          <br> -->
+          <br/>
           <h5>Comments (3)</h5>
           <hr>
           {{#each comments}}
@@ -36,12 +35,6 @@
             <hr>
           {{/each}}
         </div><!--thread-comments-->
-        <form>
-          <textarea class="form-control" id="thread-add-comment" rows="3" placeholder="Leave a comment here!"></textarea>
-          <br>
-          <button id="submit-btn" type="submit" class="btn btn-primary">Submit</button>
-        </form>
-        <br/><br/>
         </div><!--panel-body-->
         <br><br>
       </div><!--col-md-8-->
