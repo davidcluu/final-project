@@ -2,7 +2,14 @@
  * OnReady
  */
 
+var currentDistrict = -1;
+
 (function() {
+  $('#demographics').click(handleDemographics);
+  $('#politics').click(handlePolitics);
+  $('#health').click(handleHealth);
+  $('#crime').click(handleCrime);
+
   drawMap();
 })();
 
@@ -101,6 +108,15 @@ function drawMap() {
         .attr('class', 'district-boundaries')
         .datum(topojson.mesh(congress, congress.objects.districts, (a, b) => (a !== b && (a.id / 1000 | 0) === (b.id / 1000 | 0)) ))
         .attr('d', path);
+
+    /* Map labels */
+    svg.selectAll('.district-label')
+      .data(topojson.feature(congress, congress.objects.districts).features)
+      .enter().append('text')
+        .attr('class', d => ('district-label ' + d.id) )
+        .attr('transform', d => ('translate(' + path.centroid(d) + ')') )
+        .style('display', 'none')
+        .text(d => d.id.toString().slice(-2))
   }
 
   filterDistricts = (d) => (d.id >= 649 && d.id <= 653);
@@ -144,8 +160,7 @@ function drawDonut(id, title, data, color, speed) {
                   .on('mouseout', d => $('#' + id + ' .title').text(title) )
                 .transition()
                   .duration(speed)
-                  .attrTween('d', tweenDonut)
-                  .each('end', function() {console.log('done')} );
+                  .attrTween('d', tweenDonut);
 
   function tweenDonut(finish) {
     var start = {
@@ -207,6 +222,8 @@ function district_onMouseOver(me) {
   var geoId = district_getGeoId($me)
 
   $me.css('fill', district_mouseoverFill[geoId.state][geoId.district]);
+  $('.district-label.' + geoId.state + geoId.district)
+    .css('display', 'initial');
 }
 
 function district_onMouseOut(me) {
@@ -214,6 +231,8 @@ function district_onMouseOut(me) {
   var geoId = district_getGeoId($me)
 
   $me.css('fill', district_defaultFill)
+  $('.district-label.' + geoId.state + geoId.district)
+    .css('display', 'none');
 }
 
 function district_onClick(me) {
@@ -229,6 +248,8 @@ function district_onClick(me) {
 
   $me.css('cursor', '')
   $me.addClass('currentDistrict')
+
+  currentDistrict = district_getGeoId($me).district
 
   $.post('/getLegislator', { district : district}, function(response) {
     var district = response.legislator.district
@@ -293,4 +314,72 @@ function district_getGeoId(obj) {
   var district = geoid.slice(-2)
 
   return { state: parseInt(state), district: parseInt(district) };
+}
+
+function handleDemographics() {
+  if (currentDistrict == -1)
+    return;
+
+  queue()
+    .defer(d3.json, '/delphiData/getPopulationByAge?district=' + currentDistrict)
+    .defer(d3.json, '/delphiData/getPopulationByGender?district=' + currentDistrict)
+    .defer(d3.json, '/delphiData/getPopulationByRace?district=' + currentDistrict)
+    .await(chartReady);
+
+  function chartReady(err, data1, data2, data3) {
+    if (err) console.error(err);
+
+    $('#chart1').empty()
+    $('#chart2').empty()
+    $('#chart3').empty()
+
+    drawDonut('chart1', 'Age', data1, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data1.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
+    drawDonut('chart2', 'Gender', data2, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data2.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
+    drawDonut('chart3', 'Race', data3, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data3.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
+  }
+}
+
+function handlePolitics() {
+  if (currentDistrict == -1)
+    return;
+
+  $('#chart1').empty()
+  $('#chart2').empty()
+  $('#chart3').empty()
+}
+
+function handleHealth() {
+  if (currentDistrict == -1)
+    return;
+
+  queue()
+    .defer(d3.json, '/delphiData/getPopulationByAge?district=' + currentDistrict)
+    .defer(d3.json, '/delphiData/getPopulationByGender?district=' + currentDistrict)
+    .defer(d3.json, '/delphiData/getPopulationByRace?district=' + currentDistrict)
+    .await(chartReady);
+
+  function chartReady(err, data1, data2, data3) {
+    if (err) console.error(err);
+
+    $('#chart1').empty()
+    $('#chart2').empty()
+    $('#chart3').empty()
+
+    drawDonut('chart1', 'Age', data1, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data1.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
+    drawDonut('chart2', 'Gender', data2, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data2.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
+    drawDonut('chart3', 'Race', data3, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data3.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
+  }
+
+  console.log('health');
+}
+
+function handleCrime() {
+  if (currentDistrict == -1)
+    return;
+
+  $('#chart1').empty()
+  $('#chart2').empty()
+  $('#chart3').empty()
+
+  console.log('crime');
 }
