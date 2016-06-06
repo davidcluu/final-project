@@ -1,0 +1,26 @@
+{
+	"topic": [
+		{
+			"user": "Bob Smith",
+			"categoryName": "Republican Party",
+			"count": 52,
+			"url": "topic1"
+		},
+		{
+			"user": "Willow Smith",
+			"categoryName": "Democratic Party",
+			"count": 52,
+			"url": "topic2"
+		},
+		{
+			"user": "Sam Smith",
+			"categoryName": "Independents",
+			"count": 52,
+			"url": "topic3"
+		}
+	],
+
+	"breadcrumb": "topic",
+	"topicTitle": "Topic 1",
+	"button": "Topic"
+}

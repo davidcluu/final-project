@@ -143,8 +143,9 @@ function drawDonut(id, title, data, color, speed) {
                   .on('mouseover', d => $('#' + id + ' .title').text(d.data.label) )
                   .on('mouseout', d => $('#' + id + ' .title').text(title) )
                 .transition()
-                .duration(speed)
-                .attrTween('d', tweenDonut);
+                  .duration(speed)
+                  .attrTween('d', tweenDonut)
+                  .each('end', function() {console.log('done')} );
 
   function tweenDonut(finish) {
     var start = {
@@ -188,14 +189,14 @@ function drawDonut(id, title, data, color, speed) {
  * Interaction Functions
  */
 
-var district_defaultFill = '#ddd'
+var district_defaultFill = 'rgba(255,255,255,0.3)'
 var district_defaultMouseoverFill = {
   6 : {
-    49 : '#888',
-    50 : '#888',
-    51 : '#888',
-    52 : '#888',
-    53 : '#888'
+    49 : 'rgba(0,0,0,0.3)',
+    50 : 'rgba(0,0,0,0.3)',
+    51 : 'rgba(0,0,0,0.3)',
+    52 : 'rgba(0,0,0,0.3)',
+    53 : 'rgba(0,0,0,0.3)'
   }
 }
 
@@ -248,11 +249,11 @@ function district_onClick(me) {
       default:
         console.error('District not in range!')
     }
-    
+
     $('#rep-firstname').text(response.legislator.first_name)
-    
+
     $('#rep-lastname').text(response.legislator.last_name)
-    
+
     var district = response.legislator.party
     switch (district) {
       case 'D':

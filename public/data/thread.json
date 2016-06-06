@@ -1,0 +1,23 @@
+{
+	"user": "Lauren",
+	"posted" : "Nov 0",
+	"threadTitle": "Sample Title",
+	"threadContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a porta erat. Duis arcu mauris, euismod vel lacus id, volutpat tincidunt libero. Vivamus suscipit, justo id feugiat tempus, mi nunc dictum nunc, sed scelerisque ipsum erat id felis. Aenean tincidunt diam eget nunc tristique, nec fringilla leo facilisis. Quisque id elit porta, pretium diam varius, interdum mauris. Pellentesque quis velit est. Nulla sit amet pretium est. Maecenas a massa eget eros ultricies faucibus. Curabitur hendrerit ut mi dapibus cursus. Quisque pretium consequat molestie. Nunc egestas malesuada sem, non rutrum nisi. In imperdiet ligula vel tortor egestas, ac interdum arcu feugiat. Sed aliquam nec ligula sed placerat.",
+	"comments": [
+		{
+			"user": "user 1",
+			"posted": "Nov 1",
+			"comment": "wow this is insightful"
+		},
+		{
+			"user": "user 2",
+			"posted": "Nov 12",
+			"comment": "i disagree"
+		},
+		{
+			"user": "user 3",
+			"posted": "Nov 123",
+			"comment": "oh whaddup"
+		}
+	]
+}

@@ -25,19 +25,19 @@ path {
 
 .map-container {
    @include half-container($light-blue);
-   left: 0;
+   right: 0;
 }
 
 .results-container {
    @include half-container($grey);
-   right: 0;
+   left: 0;
 }
 
 #results-content {
-   width: 90%;
+   width: 93%;
    margin-left: auto;
    margin-right: auto;
-   padding-top: 80px;
+   padding-top: 70px;
    h2 {
       font-style: italic;
       font-weight: 700;
@@ -57,7 +57,7 @@ box-shadow:none !important;
 }
 
 .btn {
-   border-left: 1px solid $grey;
+   // border-left: 1px solid $grey;
    background-color: white;
 }
 
@@ -74,6 +74,7 @@ box-shadow:none !important;
    border-bottom: 1px solid $grey;
    position: fixed;
    box-shadow: 1px 1px 3px transparentize(#999, 0.1);
+   width: 50%; /* only if container on left cause it spans the whole width */
 }
 
 /* panels */
@@ -89,14 +90,14 @@ box-shadow:none !important;
 .panel-body {
    background-color: white;
    border: 1px solid $grey;
-   h6 {
+   h5 {
       color: $red-orange;
       font-family: $body-font;
-      text-transform: uppercase;
+      // text-transform: uppercase;
       font-weight: 700;
    }
    p {
-      font-size: 2em;
+      font-size: 1em;
    }
 }
 

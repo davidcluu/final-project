@@ -1,0 +1,40 @@
+{
+	"category": [
+		{
+			"icon": "/img/forum-dots/election.png",
+			"categoryName": "Election",
+			"count": 52,
+			"url": "election"
+		},
+		{
+			"icon": "/img/forum-dots/election.png",
+			"categoryName": "Party Talk",
+			"count": 6,
+			"url": "partytalk"
+		},
+		{
+			"icon": "/img/forum-dots/election.png",
+			"categoryName": "Neighborhood Talk",
+			"count": 5,
+			"url": "neighbortalk"
+		},
+		{
+			"icon": "/img/forum-dots/election.png",
+			"categoryName": "Polling",
+			"count": 4,
+			"url": "neighbortalk"
+		},
+		{
+			"icon": "/img/forum-dots/election.png",
+			"categoryName": "Election Candidates",
+			"count": 2,
+			"url": "neighbortalk"
+		},
+		{
+			"icon": "/img/forum-dots/election.png",
+			"categoryName": "Headlines",
+			"count": 9,
+			"url": "neighbortalk"
+		}
+	]
+}

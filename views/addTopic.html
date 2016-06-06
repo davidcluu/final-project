@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+{{> metadata}}
+<link rel="stylesheet" href="/css/forum.css">
+<body>
+    {{> facebook}} {{> navbar}}
+
+  <div class="container pushFooter">
+    <div class="forum-header">
+      <h2>Add Topic</h2>
+    </div>
+    <div class="row">
+
+      <!--category table-->
+      <div class="col-md-8">
+        <form>
+          <fieldset class="form-group">
+            <input type="text" class="form-control" id="topic-title" placeholder="Enter title here!"></input>
+            <textarea class="form-control" id="topic-content" rows="10" placeholder="Enter content here!"></textarea>
+          </fieldset>
+          <button id="submit-btn" type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div><!--col-md-8-->
+      
+      {{> recentlyViewed}}
+
+
+    </div><!--row-->
+  </div><!--contianer-->
+
+
+  <footer>Team M, COGS 121 Spring 2016</footer>
+</body>
+
+</html>

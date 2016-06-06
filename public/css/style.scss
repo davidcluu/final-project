@@ -1,9 +1,19 @@
 @import "variables";
-body,
+
 html {
     height: 100%;
-    font-family: $body-font;
-    color: $black;
+}
+
+body {
+   font-family: $body-font;
+   color: $black;
+   min-height: 100%;
+   display: flex;
+   flex-direction: column;
+}
+
+.pushFooter {
+   flex: 1;
 }
 
 /* navbar */
