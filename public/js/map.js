@@ -120,6 +120,7 @@ function drawMap() {
   }
 
   filterDistricts = (d) => (d.id >= 649 && d.id <= 653);
+  $('#init-message').append("<h2>Let\'s get started.</h2><br><p>Click a congressional on the right to see its corresponding statistical data. Data includes political, demographical, health, and crime statistics.</p>");
 }
 
 
@@ -306,7 +307,8 @@ function district_onClick(me) {
     $('#chart4').empty()
     $('#chart5').empty()
     $('#chart7').empty()
-
+    
+    $('#init-message').empty()
 
     drawDonut('chart1', 'Age', data1, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data1.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
     drawDonut('chart2', 'Gender', data2, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data2.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
@@ -349,6 +351,8 @@ function handleDemographics() {
     $('#chart5').empty()
     $('#chart7').empty()
 
+    $('#init-message').empty()
+
     drawDonut('chart1', 'Age', data1, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data1.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
     drawDonut('chart2', 'Gender', data2, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data2.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
     drawDonut('chart3', 'Race', data3, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data3.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
@@ -372,6 +376,11 @@ function handlePolitics() {
     $('#chart1').empty()
     $('#chart2').empty()
     $('#chart3').empty()
+    $('#chart4').empty()
+    $('#chart5').empty()
+    $('#chart7').empty()
+
+    $('#init-message').empty()
 
     var data1_cd = data1[currentDistrict]
     var data1Normalized = []
@@ -400,6 +409,11 @@ function handleHealth() {
     $('#chart1').empty()
     $('#chart2').empty()
     $('#chart3').empty()
+    $('#chart4').empty()
+    $('#chart5').empty()
+    $('#chart7').empty()
+
+    $('#init-message').empty()
 
     drawDonut('chart1', 'Age', data1, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data1.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
     drawDonut('chart2', 'Gender', data2, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data2.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
@@ -423,6 +437,11 @@ function handleCrime() {
     $('#chart1').empty()
     $('#chart2').empty()
     $('#chart3').empty()
+    $('#chart4').empty()
+    $('#chart5').empty()
+    $('#chart7').empty()
+
+    $('#init-message').empty()
    
     drawDonut('chart1', 'Crime', data1, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data1.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
   }
