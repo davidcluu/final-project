@@ -9,6 +9,10 @@ path {
   stroke: #fff;
   stroke-width: 1px; }
 
+.currentDistrict {
+  fill: rgba(0,0,0,0.3) !important;
+}
+
 /* styling for the results */
 @media (min-width: 1024px) {
   .results {
