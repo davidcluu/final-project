@@ -14,6 +14,7 @@ exports.view = function(req, res){
             'count': d.count,
             'url': d.subCategoryName.split(' ').map(d => d.toLowerCase()).join('-')
           }) ),
+        'breadcrumb': title,
         'topicTitle': title,
         'username': 'David Luu'
       }

@@ -9,8 +9,9 @@ var span = document.getElementsByClassName("close")[0];
 
 // Submit button stuff
 var submit = document.getElementById("submit-btn");
-var category = document.getElementById("category-title");
 var title = document.getElementById("topic-title");
+var topic = document.getElementById("topic");
+var content = document.getElementById("topic-content");
 var username = document.getElementById("username");
 var topicList = document.getElementById("topic-list");
 
@@ -41,8 +42,8 @@ submit.onclick = function(event) {
 
         var tdNode1 = document.createElement("td");
         var aNode = document.createElement("a");
-        aNode.id = 'topicID'
-        aNode.href = '/topicfeed?='
+        aNode.id = 'topicID';
+        aNode.href = '/topicfeed?topic=' + title.value;
         aNode.appendChild(document.createTextNode(title.value));
         tdNode1.appendChild(aNode);
         trNode.appendChild(tdNode1);
@@ -60,7 +61,18 @@ submit.onclick = function(event) {
         modal.style.display = 'none';
       }
     }
-    req.open('POST', '/addTopic', true);
+    req.open('POST', '/addThread', true);
     req.setRequestHeader('Content-type','application/x-www-form-urlencoded');
-    req.send('category=' + category.value + '&title=' + title.value + '&username=' + username.value);
+    req.send('user=' + username.value  + '&subCategory=' + topic.value + '&threadName=' + title.value + '&content=' + content.value);
 }
+
+/*
+var ThreadSchema = new Schema({
+  'user': String,
+  'subCategory': String,
+  'threadName': String,
+  'content': String,
+  'count': { type: Number, default: 0 },
+  'posted': { type: Date, default: Date.now() }
+});
+*/
