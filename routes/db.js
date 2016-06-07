@@ -202,15 +202,13 @@ exports.queryMedicalSpending = function (req, res) {
     "AND (\"Expenditure Type\" LIKE '%Care - Total%')" +
     "AND NOT \"Expenditure Type\" LIKE 'Any%'"
 
-  req.dbclient.query(query, function(err, result) {    console.log(json);
+  req.dbclient.query(query, function(err, result) {
     if(err) tryReconnect(req, res, err)
 
     var temp = {}
     result.rows.forEach( function(d) { temp[d.expenditures] = temp[d.expenditures] ? temp[d.expenditures] + d.amount : d.amount } )
 
     var json = Object.keys(temp).map( (d) => ({label: d, count: temp[d]}) )
-
-    console.log(req);
 
     res.json(json)
   });
@@ -231,15 +229,13 @@ exports.queryMedicalServicesSpending = function (req, res) {
     "AND \"Expenditure Type\" LIKE 'Medical Care%' AND NOT \"Expenditure Type\" LIKE '%- Total'" +
     "AND NOT \"Expenditure Type\" LIKE 'Any%'"
 
-  req.dbclient.query(query, function(err, result) {    console.log(json);
+  req.dbclient.query(query, function(err, result) {
     if(err) tryReconnect(req, res, err)
 
     var temp = {}
     result.rows.forEach( function(d) { temp[d.expenditures] = temp[d.expenditures] ? temp[d.expenditures] + d.amount : d.amount } )
 
-    var json = Object.keys(temp).map( (d) => ({label: d, count: temp[d]}) )
-
-    console.log(req);
+    var json = Object.keys(temp).map( (d) => ({label: shortenData(d), count: temp[d]}) )
 
     res.json(json)
   });
@@ -260,15 +256,13 @@ exports.queryHealthInsuranceSpending = function (req, res) {
     "AND \"Expenditure Type\" LIKE 'Health Insurance%' AND NOT \"Expenditure Type\" LIKE '%- Total'" +
     "AND NOT \"Expenditure Type\" LIKE 'Any%'"
 
-  req.dbclient.query(query, function(err, result) {    console.log(json);
+  req.dbclient.query(query, function(err, result) {
     if(err) tryReconnect(req, res, err)
 
     var temp = {}
     result.rows.forEach( function(d) { temp[d.expenditures] = temp[d.expenditures] ? temp[d.expenditures] + d.amount : d.amount } )
 
-    var json = Object.keys(temp).map( (d) => ({label: d, count: temp[d]}) )
-
-    console.log(req);
+    var json = Object.keys(temp).map( (d) => ({label: shortenData(d), count: temp[d]}) )
 
     res.json(json)
   });
@@ -290,6 +284,18 @@ function tryReconnect(req, res, err) {
       return
     }
   });
+}
+
+function shortenData(str) {
+  var ban1 = "Medical Care - ";
+  var ban2 = "Health Insurance - ";
+  if (str.indexOf(ban1) != -1) {
+    return str.substring(ban1.length);
+  }
+  if (str.indexOf(ban2) != -1) {
+    return str.substring(ban2.length);
+  }
+  return str
 }
 
 
