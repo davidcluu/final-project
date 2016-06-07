@@ -36,6 +36,9 @@ body {
   .navbar-default .navbar-nav li a:hover {
     color: rgba(100, 212, 255, 0.3); }
 
+.active {
+  text-transform: uppercase; }
+
 /* footer */
 footer {
   height: 70px;

@@ -47,6 +47,14 @@ body {
       }
    }
 }
+
+.navbar-inner {
+    background:transparent;
+}
+
+.active {
+   text-transform: uppercase;
+}
 /* footer */
 footer {
     height: 70px;
@@ -55,6 +63,7 @@ footer {
     background-color: $black;
     color: $grey;
 }
+
 /* video */
 .homepage-hero-module {
     border-right: none;
@@ -86,7 +95,7 @@ footer {
 .video-container .filter {
     z-index: 100;
     position: absolute;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.3);
     width: 100%;
     height: 100%;
 }
@@ -127,7 +136,7 @@ h6 {
 }
 
 #landing-image {
-    background-color: $periwinkle;
+    background: $periwinkle;
 }
 
 #call-to-action {
