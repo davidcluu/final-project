@@ -26,11 +26,10 @@
             <button id="submit-btn" type="submit" class="btn btn-primary">Submit</button>
           </form>
           <br/>
-          <h5>Comments (3)</h5>
+          <h5>Comments ({{count}})</h5>
           <hr>
           {{#each comments}}
-            {{user}}
-            {{posted}}
+            {{user}} - {{posted}}
             <p>{{comment}}</p>
             <hr>
           {{/each}}
@@ -43,9 +42,28 @@
     </div><!--row-->
   </div><!--thread-->
 
-
-
   <footer>Team M, COGS 121 Spring 2016</footer>
+
+  <script src="/js/jquery.min.js"></script>
+  <script>
+    $(function() {
+      $('form').submit(function(e){
+        e.preventDefault();
+
+        var content = $('#thread-add-comment').val()
+
+        $.post('/addComment', {
+          user: '{{user}}',
+          thread: '{{threadTitle}}',
+          content: content
+        }, function(){
+          $('.thread-comments').append('{{user}} - Just Now <p>' + content + '</p><hr>');
+        })
+
+        $('#thread-add-comment').val('')
+      })
+    });
+  </script>
 </body>
 
 </html>

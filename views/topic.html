@@ -19,11 +19,7 @@
                 <div class="panel-body forum-margin-btm">
                     <div class="table-responsive">
                         <div class="add-topic">
-                            {{#if button}}
-                            <!-- <a id="add-btn" href="/addTopic" role="button"> -->
                             <button type="button" id="new-topic" data-toggle="modal" data-target="#myModal">New Topic</button>
-                            <!-- </a> -->
-                            {{/if}}
                             <!-- The Modal -->
                             <div id="myModal" class="modal ">
                                 <!-- Modal content -->
@@ -31,8 +27,10 @@
                                     <div class="modal-content">
                                         <span class="close">x</span>
                                         <h2>Create a New Topic</h2>
-                                        <form>
+                                        <form action="/addTopic" method="POST">
                                             <fieldset class="form-group">
+                                                <input id="category-title" value="{{topicTitle}}" hidden></input>
+                                                <input id="username" value="{{username}}" hidden></input>
                                                 <input type="text" class="form-control" id="topic-title" placeholder="Write a descriptive title"></input>
                                                 <textarea class="form-control" id="topic-content" rows="10" placeholder="Elaborate and provide more details"></textarea>
                                                 <button id="submit-btn" type="submit">Submit</button>
@@ -52,10 +50,10 @@
                                     <th>No. of Threads</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="topic-list">
                                 {{#each topic}}
                                 <tr>
-                                    <td><a id="topicID" href="/topicfeed?={{id}}">{{categoryName}}</a></td>
+                                    <td><a id="topicID" href="/topicfeed?topic={{categoryName}}">{{categoryName}}</a></td>
                                     <td>{{user}}</td>
                                     <td>{{count}}</td>
                                 </tr>
@@ -80,7 +78,7 @@
 
 
     <footer>Team M, COGS 121 Spring 2016</footer>
-    <script src="/js/modal.js"></script>
+    <script src="/js/modal-topic.js"></script>
 
 </body>
 

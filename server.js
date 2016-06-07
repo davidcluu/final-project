@@ -52,6 +52,8 @@ var router = {
   topic: require('./routes/topic'),
   topicfeed: require('./routes/topicfeed'),
   addTopic: require('./routes/addTopic'),
+  addThread: require('./routes/addThread'),
+  addComment: require('./routes/addComment'),
   add: require('./routes/add'),
   thread: require('./routes/thread'),
   auth: require('./routes/auth'),
@@ -90,9 +92,11 @@ app.get('/map', router.map.view);
 
 app.get('/forum', router.forum.view);
 app.get('/topic', router.topic.view);
-app.get('/addTopic', router.addTopic.view);
 app.get('/topicfeed', router.topicfeed.view);
 app.get('/thread', router.thread.view);
+app.post('/addTopic', router.addTopic.post);
+app.post('/addThread', router.addThread.post);
+app.post('/addComment', router.addComment.post);
 
 app.get('/add-topic', router.add.addTopic);
 

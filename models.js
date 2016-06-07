@@ -20,6 +20,7 @@ var CategorySchema = new Schema({
 var SubCategorySchema = new Schema({
 	'category': String,
 	'subCategoryName': String,
+	'user': String,
 	'count': {type: Number, default: 0}
 });
 
@@ -49,3 +50,4 @@ exports.FBUser = mongoose.model('FBUser', FBUserSchema);
 exports.SubCategory = mongoose.model('SubCategory', SubCategorySchema);
 exports.Thread = mongoose.model('Thread', ThreadSchema);
 exports.Comment = mongoose.model('Comment', CommentSchema);
+exports.RecentlyViewed = mongoose.model('RecentlyViewed', RecentlyViewedSchema);

@@ -18,11 +18,7 @@
                 <div class="panel-body forum-margin-btm">
                     <div class="table-responsive">
                         <div class="add-topic">
-                            {{#if button}}
-                            <!-- <a id="add-btn" href="/addTopic" role="button"> -->
                             <button type="button" id="new-topic" data-toggle="modal" data-target="#myModal">New Thread</button>
-                            <!-- </a> -->
-                            {{/if}}
                             <!-- The Modal -->
                             <div id="myModal" class="modal ">
                                 <!-- Modal content -->
@@ -32,6 +28,8 @@
                                         <h2>Create a New Thread</h2>
                                         <form>
                                             <fieldset class="form-group">
+                                                <input id="topic" value="{{topic}}" hidden></input>
+                                                <input id="username" value="{{username}}" hidden></input>
                                                 <input type="text" class="form-control" id="topic-title" placeholder="Write a descriptive title"></input>
                                                 <textarea class="form-control" id="topic-content" rows="10" placeholder="Elaborate and provide more details"></textarea>
                                                 <button id="submit-btn" type="submit">Submit</button>
@@ -51,10 +49,10 @@
                                     <th>No. of Threads</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="topic-list">
                                 {{#each topic-thread}}
                                 <tr>
-                                    <td><a id="topicID" href="/thread?={{id}}">{{categoryName}}</a></td>
+                                    <td><a id="topicID" href="/thread?thread={{threadName}}">{{threadName}}</a></td>
                                     <td>{{user}}</td>
                                     <td>{{count}}</td>
                                 </tr>
@@ -78,6 +76,6 @@
 
     <footer>Team M, COGS 121 Spring 2016</footer>
 </body>
-<script src="/js/modal.js"></script>
+<script src="/js/modal-topicfeed.js"></script>
 
 </html>
