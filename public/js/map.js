@@ -9,6 +9,7 @@ var currentDistrict = -1;
   $('#politics').click(handlePolitics);
   $('#health').click(handleHealth);
   $('#crime').click(handleCrime);
+  
 
   $('#search-btn').click(function(e) {
     e.preventDefault();
@@ -138,6 +139,7 @@ function drawMap() {
 
   filterDistricts = (d) => (d.id >= 649 && d.id <= 653);
   $('#init-message').append("<h2>Let\'s get started.</h2><br><p>Click a congressional on the right to see its corresponding statistical data. Data includes political, demographical, health, and crime statistics.</p>");
+  $('#help-btn').append("<button id=\"help\" type=\"text\" class=> How did we chose our datasets?");
 }
 
 
