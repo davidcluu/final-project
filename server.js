@@ -115,7 +115,8 @@ app.get('/delphiData/getPopulationByEducation', router.db.query.queryPopulationB
 app.get('/delphiData/getPopulationByTypeEducation', router.db.query.queryPopulationByTypeEducation);
 app.get('/delphiData/getPopulationByLanguages', router.db.query.queryPopulationByLanguages);
 app.get('/delphiData/getMedicalSpending', router.db.query.queryMedicalSpending);
-
+app.get('/delphiData/getMedicalServicesSpending', router.db.query.queryMedicalServicesSpending);
+app.get('/delphiData/getHealthInsuranceSpending', router.db.query.queryHealthInsuranceSpending);
 
 /* Listen on port */
 http.createServer(app).listen(app.get('port'), function() {

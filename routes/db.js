@@ -189,7 +189,7 @@ exports.queryPopulationByLanguages = function (req, res) {
 
 exports.queryMedicalSpending = function (req, res) {
   var district = parseInt(req.query.district)
-  var reducedSRAtoCDKeys = Object.keys(SRAtoCD).filter( d => SRAtoCD[d].indexOf(district) != -1 )
+  var reducedSRAtoCDKeys = Object.keys(capsSRAtoCD).filter( d => capsSRAtoCD[d].indexOf(district) != -1 )
 
   var query =
      "SELECT \"SRA\" as area, \"Expenditure Type\" as expenditures, \"Average Amount Spent\" AS amount " +
@@ -215,6 +215,65 @@ exports.queryMedicalSpending = function (req, res) {
     res.json(json)
   });
 }
+
+exports.queryMedicalServicesSpending = function (req, res) {
+  var district = parseInt(req.query.district)
+  var reducedSRAtoCDKeys = Object.keys(capsSRAtoCD).filter( d => capsSRAtoCD[d].indexOf(district) != -1 )
+
+  var query =
+     "SELECT \"SRA\" as area, \"Expenditure Type\" as expenditures, \"Average Amount Spent\" AS amount " +
+    "FROM cogs121_16_raw.esri_consumer_expenditure_medical d " +
+    "WHERE d.\"SRA\" IN (" +
+      reducedSRAtoCDKeys
+        .map( d => ("'" + d + "'") )
+        .join(", ")
+    + ") " +
+    "AND \"Expenditure Type\" LIKE 'Medical Care%' AND NOT \"Expenditure Type\" LIKE '%- Total'" +
+    "AND NOT \"Expenditure Type\" LIKE 'Any%'"
+
+  req.dbclient.query(query, function(err, result) {    console.log(json);
+    if(err) tryReconnect(req, res, err)
+
+    var temp = {}
+    result.rows.forEach( function(d) { temp[d.expenditures] = temp[d.expenditures] ? temp[d.expenditures] + d.amount : d.amount } )
+
+    var json = Object.keys(temp).map( (d) => ({label: d, count: temp[d]}) )
+
+    console.log(req);
+
+    res.json(json)
+  });
+}
+
+exports.queryHealthInsuranceSpending = function (req, res) {
+  var district = parseInt(req.query.district)
+  var reducedSRAtoCDKeys = Object.keys(capsSRAtoCD).filter( d => capsSRAtoCD[d].indexOf(district) != -1 )
+
+  var query =
+     "SELECT \"SRA\" as area, \"Expenditure Type\" as expenditures, \"Average Amount Spent\" AS amount " +
+    "FROM cogs121_16_raw.esri_consumer_expenditure_medical d " +
+    "WHERE d.\"SRA\" IN (" +
+      reducedSRAtoCDKeys
+        .map( d => ("'" + d + "'") )
+        .join(", ")
+    + ") " +
+    "AND \"Expenditure Type\" LIKE 'Health Insurance%' AND NOT \"Expenditure Type\" LIKE '%- Total'" +
+    "AND NOT \"Expenditure Type\" LIKE 'Any%'"
+
+  req.dbclient.query(query, function(err, result) {    console.log(json);
+    if(err) tryReconnect(req, res, err)
+
+    var temp = {}
+    result.rows.forEach( function(d) { temp[d.expenditures] = temp[d.expenditures] ? temp[d.expenditures] + d.amount : d.amount } )
+
+    var json = Object.keys(temp).map( (d) => ({label: d, count: temp[d]}) )
+
+    console.log(req);
+
+    res.json(json)
+  });
+}
+
 
 /* Helper Functions */
 
@@ -279,6 +338,50 @@ var SRAtoCD = {
   "National City" : [51],
   "South Bay" : [51],
   "Sweetwater" : [51, 53]
+}
+
+var capsSRAtoCD = {
+  "CENTRAL SD" : [53],
+  "MID-CITY" : [53],
+  "SOUTHEAST SD" : [51, 52],
+  "ALPINE" : [51],
+  "EL CAJON" : [50],
+  "HARBISON CREST" : [50],
+  "JAMUL" : [50, 51],
+  "LA MESA" : [50, 53],
+  "LAGUNA-PINE VALLEY" : [50],
+  "LAKESIDE" : [50],
+  "LEMON GROVE" : [51],
+  "MOUNTAIN EMPIRE" : [50, 51],
+  "SANTEE" : [50],
+  "SPRING VALLEY" : [53],
+  "COASTAL" : [52, 53],
+  "DEL MAR-MIRA MESA" : [52],
+  "ELLIOTT-NAVAJO" : [52],
+  "KEARNY MESA" : [52, 53],
+  "MIRAMAR" : [52],
+  "PENINSULA" : [52],
+  "UNIVERSITY" : [49, 52],
+  "CARLSBAD" : [49],
+  "OCEANSIDE" : [49],
+  "PENDLETON" : [49],
+  "SAN DIEGUITO" : [49, 50],
+  "VISTA" : [49],
+  "ANZA-BORREGO SPRINGS" : [50, 51],
+  "ESCONDIDO" : [50],
+  "FALLBROOK" : [50],
+  "NORTH SD" : [49, 52],
+  "PALOMAR-JULIAN" : [50],
+  "PAUMA" : [50],
+  "POWAY" : [50, 52],
+  "RAMONA" : [50],
+  "SAN MARCOS" : [50],
+  "VALLEY CENTER" : [50],
+  "CHULA VISTA" : [51],
+  "CORONADO" : [52],
+  "NATIONAL CITY" : [51],
+  "SOUTH BAY" : [51],
+  "SWEETWATER" : [51, 53]
 }
 
 var CDtoZip = {

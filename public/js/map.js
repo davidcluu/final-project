@@ -10,6 +10,23 @@ var currentDistrict = -1;
   $('#health').click(handleHealth);
   $('#crime').click(handleCrime);
 
+  $('#search-btn').click(function(e) {
+    e.preventDefault();
+
+    var searchVal = $('#search-field').val();
+    var cds = SRAtoCD[searchVal];
+
+    if (!cds) {
+      console.log('error');
+    }
+    else {
+      console.log()
+      $('#6' + cds[0]).click();
+    }
+
+    $('#search-field').val('');
+  });
+
   drawMap();
 })();
 
@@ -277,8 +294,10 @@ function district_onClick(me) {
 
     $('#rep-lastname').text(response.legislator.last_name)
 
-    var district = response.legislator.party
-    switch (district) {
+    $('#district-population').text(districtPopulation[district]);
+
+    var party = response.legislator.party
+    switch (party) {
       case 'D':
         $('#rep-party').text('Democratic')
         break
@@ -402,8 +421,8 @@ function handleHealth() {
 
   queue()
     .defer(d3.json, '/delphiData/getMedicalSpending?district=' + currentDistrict)
-    .defer(d3.json, '/delphiData/getPopulationByGender?district=' + currentDistrict)
-    .defer(d3.json, '/delphiData/getPopulationByRace?district=' + currentDistrict)
+    .defer(d3.json, '/delphiData/getMedicalServicesSpending?district=' + currentDistrict)
+    .defer(d3.json, '/delphiData/getHealthInsuranceSpending?district=' + currentDistrict)
     .await(chartReady);
 
   function chartReady(err, data1, data2, data3) {
@@ -419,9 +438,9 @@ function handleHealth() {
 
     $('#init-message').empty()
 
-    drawDonut('chart1', 'Medical', data1, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data1.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
-    drawDonut('chart2', 'Gender', data2, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data2.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
-    drawDonut('chart3', 'Race', data3, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data3.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
+    drawDonut('chart1', 'Spending Breakdown', data1, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data1.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
+    drawDonut('chart2', 'Medical Services', data2, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data2.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
+    drawDonut('chart3', 'Health Insurance', data3, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data3.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
   }
 
   console.log('health');
@@ -451,4 +470,56 @@ function handleCrime() {
   }
 }
 
+
+var SRAtoCD = {
+  "Central SD" : [53],
+  "Mid-City" : [53],
+  "Southeast SD" : [51, 52],
+  "Alpine" : [51],
+  "El Cajon" : [50],
+  "Harbison Crest" : [50],
+  "Jamul" : [50, 51],
+  "La Mesa" : [50, 53],
+  "Laguna-Pine Valley" : [50],
+  "Lakeside" : [50],
+  "Lemon Grove" : [51],
+  "Mountain Empire" : [50, 51],
+  "Santee" : [50],
+  "Spring Valley" : [53],
+  "Coastal" : [52, 53],
+  "Del Mar-Mira Mesa" : [52],
+  "Elliott-Navajo" : [52],
+  "Kearny Mesa" : [52, 53],
+  "Miramar" : [52],
+  "Peninsula" : [52],
+  "University" : [49, 52],
+  "Carlsbad" : [49],
+  "Oceanside" : [49],
+  "Pendleton" : [49],
+  "San Dieguito" : [49, 50],
+  "Vista" : [49],
+  "Anza-Borrego Springs" : [50, 51],
+  "Escondido" : [50],
+  "Fallbrook" : [50],
+  "North SD" : [49, 52],
+  "Palomar-Julian" : [50],
+  "Pauma" : [50],
+  "Poway" : [50, 52],
+  "Ramona" : [50],
+  "San Marcos" : [50],
+  "Valley Center" : [50],
+  "Chula Vista" : [51],
+  "Coronado" : [52],
+  "National City" : [51],
+  "South Bay" : [51],
+  "Sweetwater" : [51, 53]
+}
+
+var districtPopulation = {
+  '49' : '717,823',
+  '50' : '730,427',
+  '51' : '743,982',
+  '52' : '713,904',
+  '53' : '741,909'
+}
 
