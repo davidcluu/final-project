@@ -114,8 +114,7 @@ app.get('/delphiData/getCrime', router.db.query.queryCrime);
 app.get('/delphiData/getPopulationByEducation', router.db.query.queryPopulationByEducation);
 app.get('/delphiData/getPopulationByTypeEducation', router.db.query.queryPopulationByTypeEducation);
 app.get('/delphiData/getPopulationByLanguages', router.db.query.queryPopulationByLanguages);
-app.get('/delphiData/getPopulationByIncome', router.db.query.queryPopulationByIncome);
-
+app.get('/delphiData/getMedicalSpending', router.db.query.queryMedicalSpending);
 
 
 /* Listen on port */

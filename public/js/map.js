@@ -9,7 +9,6 @@ var currentDistrict = -1;
   $('#politics').click(handlePolitics);
   $('#health').click(handleHealth);
   $('#crime').click(handleCrime);
-  
 
   drawMap();
 })();
@@ -309,6 +308,7 @@ function district_onClick(me) {
     $('#chart4').empty()
     $('#chart5').empty()
     $('#chart7').empty()
+    $('#chart8').empty()
     
     $('#init-message').empty()
 
@@ -381,6 +381,7 @@ function handlePolitics() {
     $('#chart4').empty()
     $('#chart5').empty()
     $('#chart7').empty()
+    $('#chart8').empty()
 
     $('#init-message').empty()
 
@@ -400,7 +401,7 @@ function handleHealth() {
     return;
 
   queue()
-    .defer(d3.json, '/delphiData/getPopulationByAge?district=' + currentDistrict)
+    .defer(d3.json, '/delphiData/getMedicalSpending?district=' + currentDistrict)
     .defer(d3.json, '/delphiData/getPopulationByGender?district=' + currentDistrict)
     .defer(d3.json, '/delphiData/getPopulationByRace?district=' + currentDistrict)
     .await(chartReady);
@@ -414,10 +415,11 @@ function handleHealth() {
     $('#chart4').empty()
     $('#chart5').empty()
     $('#chart7').empty()
+    $('#chart8').empty()
 
     $('#init-message').empty()
 
-    drawDonut('chart1', 'Age', data1, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data1.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
+    drawDonut('chart1', 'Medical', data1, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data1.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
     drawDonut('chart2', 'Gender', data2, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data2.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
     drawDonut('chart3', 'Race', data3, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data3.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
   }
@@ -448,3 +450,5 @@ function handleCrime() {
     drawDonut('chart1', 'Crime', data1, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data1.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
   }
 }
+
+

@@ -187,6 +187,34 @@ exports.queryPopulationByLanguages = function (req, res) {
   });
 }
 
+exports.queryMedicalSpending = function (req, res) {
+  var district = parseInt(req.query.district)
+  var reducedSRAtoCDKeys = Object.keys(SRAtoCD).filter( d => SRAtoCD[d].indexOf(district) != -1 )
+
+  var query =
+     "SELECT \"SRA\" as area, \"Expenditure Type\" as expenditures, \"Average Amount Spent\" AS amount " +
+    "FROM cogs121_16_raw.esri_consumer_expenditure_medical d " +
+    "WHERE d.\"SRA\" IN (" +
+      reducedSRAtoCDKeys
+        .map( d => ("'" + d + "'") )
+        .join(", ")
+    + ") " +
+    "AND (\"Expenditure Type\" LIKE '%Care - Total%')" +
+    "AND NOT \"Expenditure Type\" LIKE 'Any%'"
+
+  req.dbclient.query(query, function(err, result) {    console.log(json);
+    if(err) tryReconnect(req, res, err)
+
+    var temp = {}
+    result.rows.forEach( function(d) { temp[d.expenditures] = temp[d.expenditures] ? temp[d.expenditures] + d.amount : d.amount } )
+
+    var json = Object.keys(temp).map( (d) => ({label: d, count: temp[d]}) )
+
+    console.log(req);
+
+    res.json(json)
+  });
+}
 
 /* Helper Functions */
 
@@ -204,57 +232,9 @@ function tryReconnect(req, res, err) {
     }
   });
 }
-exports.queryPopulationByIncome = function (req, res) {
-  var district = parseInt(req.query.district)
-  var reducedSRAtoCDKeys = Object.keys(SRAtoCD).filter( d => SRAtoCD[d].indexOf(district) != -1 )
 
-  var query =
-     "SELECT \"Area\" AS area, \"Expenditure Type\" AS expenditure, \"Average Amount Spent\" AS amount, \"Percent\" as percent " +
-    "FROM cogs121_16_raw.hhsa_san_diego_demographics_languages_2012_norm d " +
-    "WHERE d.\"Area\" IN (" +
-      reducedSRAtoCDKeys
-        .map( d => ("'" + d + "'") )
-        .join(", ")
-    + ") " +
-    "AND NOT \"Expenditure Type\" LIKE 'Any%'"
 
-  req.dbclient.query(query, function(err, result) {
-    if(err) tryReconnect(req, res, err)
 
-    var temp = {}
-    result.rows.forEach( function(d) { temp[d.expenditure] = temp[d.expenditure] ? temp[d.expenditure] + d.amount : d.amount} )
-
-    var json = Object.keys(temp).map( (d) => ({label: d, count: temp[d]}) )
-
-    res.json(json)
-  });
-}
-
-exports.queryVehiclesByHousehold = function (req, res) {
-  var district = parseInt(req.query.district)
-  var reducedSRAtoCDKeys = Object.keys(SRAtoCD).filter( d => SRAtoCD[d].indexOf(district) != -1 )
-
-  var query =
-     "SELECT \"Area\" AS area, \"Expenditure Type\" AS expenditure, \"Average Amount Spent\" AS amount, \"Percent\" as percent " +
-    "FROM cogs121_16_raw.hhsa_san_diego_demographics_languages_2012_norm d " +
-    "WHERE d.\"Area\" IN (" +
-      reducedSRAtoCDKeys
-        .map( d => ("'" + d + "'") )
-        .join(", ")
-    + ") " +
-    "AND NOT \"Expenditure Type\" LIKE 'Any%'"
-
-  req.dbclient.query(query, function(err, result) {
-    if(err) tryReconnect(req, res, err)
-
-    var temp = {}
-    result.rows.forEach( function(d) { temp[d.expenditure] = temp[d.expenditure] ? temp[d.expenditure] + d.amount : d.amount} )
-
-    var json = Object.keys(temp).map( (d) => ({label: d, count: temp[d]}) )
-
-    res.json(json)
-  });
-}
 /* Hardcoded Stuff */
 
 var SRAtoCD = {
