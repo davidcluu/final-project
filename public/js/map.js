@@ -292,18 +292,28 @@ function district_onClick(me) {
     .defer(d3.json, '/delphiData/getPopulationByAge?district=' + district)
     .defer(d3.json, '/delphiData/getPopulationByGender?district=' + district)
     .defer(d3.json, '/delphiData/getPopulationByRace?district=' + district)
+    .defer(d3.json, '/delphiData/getPopulationByEducation?district=' + district)
+    .defer(d3.json, '/delphiData/getPopulationByTypeEducation?district=' + district)
+    .defer(d3.json, '/delphiData/getPopulationByLanguages?district=' + district)
     .await(chartReady);
 
-  function chartReady(err, data1, data2, data3) {
+  function chartReady(err, data1, data2, data3, data4, data5, data7, data8) {
     if (err) console.error(err);
 
     $('#chart1').empty()
     $('#chart2').empty()
     $('#chart3').empty()
+    $('#chart4').empty()
+    $('#chart5').empty()
+    $('#chart7').empty()
+
 
     drawDonut('chart1', 'Age', data1, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data1.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
     drawDonut('chart2', 'Gender', data2, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data2.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
     drawDonut('chart3', 'Race', data3, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data3.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
+    drawDonut('chart4', 'Education', data4, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data4.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
+    drawDonut('chart5', 'Type of Education', data5, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data5.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
+    drawDonut('chart7', 'Languages', data7, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data7.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
   }
 }
 
@@ -324,18 +334,27 @@ function handleDemographics() {
     .defer(d3.json, '/delphiData/getPopulationByAge?district=' + currentDistrict)
     .defer(d3.json, '/delphiData/getPopulationByGender?district=' + currentDistrict)
     .defer(d3.json, '/delphiData/getPopulationByRace?district=' + currentDistrict)
+    .defer(d3.json, '/delphiData/getPopulationByEducation?district=' + currentDistrict)
+    .defer(d3.json, '/delphiData/getPopulationByTypeEducation?district=' + currentDistrict)
+    .defer(d3.json, '/delphiData/getPopulationByLanguages?district=' + currentDistrict)
     .await(chartReady);
 
-  function chartReady(err, data1, data2, data3) {
+  function chartReady(err, data1, data2, data3, data4, data5, data7) {
     if (err) console.error(err);
 
     $('#chart1').empty()
     $('#chart2').empty()
     $('#chart3').empty()
+    $('#chart4').empty()
+    $('#chart5').empty()
+    $('#chart7').empty()
 
     drawDonut('chart1', 'Age', data1, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data1.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
     drawDonut('chart2', 'Gender', data2, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data2.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
     drawDonut('chart3', 'Race', data3, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data3.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
+    drawDonut('chart4', 'Education', data4, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data4.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
+    drawDonut('chart5', 'Type of Education', data5, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data5.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
+    drawDonut('chart7', 'Languages', data7, d3.scale.linear().interpolate(d3.interpolateRgb).domain([0, data7.length - 1]).range(['#48fbd7', '#e584f1']), 2000);
   }
 }
 
