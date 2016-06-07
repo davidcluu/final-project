@@ -20,6 +20,7 @@ var CategorySchema = new Schema({
 var SubCategorySchema = new Schema({
 	'category': String,
 	'subCategoryName': String,
+	'user': String,
 	'count': {type: Number, default: 0}
 });
 

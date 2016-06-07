@@ -90,9 +90,9 @@ app.get('/map', router.map.view);
 
 app.get('/forum', router.forum.view);
 app.get('/topic', router.topic.view);
-app.get('/addTopic', router.addTopic.view);
 app.get('/topicfeed', router.topicfeed.view);
 app.get('/thread', router.thread.view);
+app.post('/addTopic', router.addTopic.post);
 
 app.get('/add-topic', router.add.addTopic);
 
