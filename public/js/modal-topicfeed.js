@@ -43,7 +43,7 @@ submit.onclick = function(event) {
         var tdNode1 = document.createElement("td");
         var aNode = document.createElement("a");
         aNode.id = 'topicID';
-        aNode.href = '/topicfeed?topic=' + title.value;
+        aNode.href = '/topicfeed?thread=' + title.value;
         aNode.appendChild(document.createTextNode(title.value));
         tdNode1.appendChild(aNode);
         trNode.appendChild(tdNode1);

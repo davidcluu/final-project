@@ -1,5 +1,4 @@
 var models = require("../models");
-var display = require("../public/data/topicfeed.json");
 
 exports.view = function(req,res) {
   models.Thread

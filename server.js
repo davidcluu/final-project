@@ -53,6 +53,7 @@ var router = {
   topicfeed: require('./routes/topicfeed'),
   addTopic: require('./routes/addTopic'),
   addThread: require('./routes/addThread'),
+  addComment: require('./routes/addComment'),
   add: require('./routes/add'),
   thread: require('./routes/thread'),
   auth: require('./routes/auth'),
@@ -95,6 +96,7 @@ app.get('/topicfeed', router.topicfeed.view);
 app.get('/thread', router.thread.view);
 app.post('/addTopic', router.addTopic.post);
 app.post('/addThread', router.addThread.post);
+app.post('/addComment', router.addComment.post);
 
 app.get('/add-topic', router.add.addTopic);
 
