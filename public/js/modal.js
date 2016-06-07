@@ -12,6 +12,7 @@ var submit = document.getElementById("submit-btn");
 var category = document.getElementById("category-title");
 var title = document.getElementById("topic-title");
 var username = document.getElementById("username");
+var topicList = document.getElementById("topic-list");
 
 // When the user clicks on the button, open the modal
 btn.onclick = function() {
@@ -36,6 +37,26 @@ submit.onclick = function(event) {
     var req = new XMLHttpRequest();
     req.onreadystatechange = function() {
       if (req.readyState == 4 && req.status == 200) {
+        var trNode = document.createElement("tr");
+
+        var tdNode1 = document.createElement("td");
+        var aNode = document.createElement("a");
+        aNode.id = 'topicID'
+        aNode.href = '/topicfeed?='
+        aNode.appendChild(document.createTextNode(title.value));
+        tdNode1.appendChild(aNode);
+        trNode.appendChild(tdNode1);
+
+        var tdNode2 = document.createElement("td");
+        tdNode2.appendChild(document.createTextNode(username.value));
+        trNode.appendChild(tdNode2);
+
+        var tdNode3 = document.createElement("td");
+        tdNode3.appendChild(document.createTextNode('0'));
+        trNode.appendChild(tdNode3);
+
+        topicList.appendChild(trNode);
+
         modal.style.display = 'none';
       }
     }
