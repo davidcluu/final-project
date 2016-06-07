@@ -9,12 +9,11 @@
                 </tr>
               </thead>
               <tbody>
+                {{#each recentlyViewed}}
                 <tr>
-                  <td>Sample 1</td>
+                  <td><a href="{{threadURL}}">{{threadName}}</a></td>
                 <tr>
-                <tr>
-                  <td>Sample 2</td>
-                </tr>
+                {{/each}}
               </tbody>
             </table>
           </div><!--table-responsive-->

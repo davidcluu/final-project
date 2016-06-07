@@ -6,20 +6,27 @@ exports.view = function(req, res){
   models.SubCategory
     .find({category : title})
     .exec(function(err, topic) {
-      var data = {
-        'topic': topic.map( d =>
-          ({
-            'user': d.user,
-            'categoryName': d.subCategoryName,
-            'count': d.count,
-            'url': d.subCategoryName.split(' ').map(d => d.toLowerCase()).join('-')
-          }) ),
-        'breadcrumb': title,
-        'topicTitle': title,
-        'username': 'David Luu'
-      }
+      models.RecentlyViewed
+      .find()
+      .limit(3)
+      .sort({'date':-1})
+      .exec(function(err, recentlyViewed) {
+        var data = {
+          'topic': topic.map( d =>
+            ({
+              'user': d.user,
+              'categoryName': d.subCategoryName,
+              'count': d.count,
+              'url': d.subCategoryName.split(' ').map(d => d.toLowerCase()).join('-')
+            }) ),
+          'breadcrumb': title,
+          'topicTitle': title,
+          'username': 'David Luu',
+          'recentlyViewed': recentlyViewed
+        }
 
-      res.render('topic', data);
+        res.render('topic', data);
+      })
     });
 }
 

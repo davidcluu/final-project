@@ -50,3 +50,4 @@ exports.FBUser = mongoose.model('FBUser', FBUserSchema);
 exports.SubCategory = mongoose.model('SubCategory', SubCategorySchema);
 exports.Thread = mongoose.model('Thread', ThreadSchema);
 exports.Comment = mongoose.model('Comment', CommentSchema);
+exports.RecentlyViewed = mongoose.model('RecentlyViewed', RecentlyViewedSchema);
